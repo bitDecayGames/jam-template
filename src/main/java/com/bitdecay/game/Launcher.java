@@ -1,19 +1,17 @@
 package com.bitdecay.game;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
-import com.badlogic.gdx.files.FileHandle;
 import com.bitdecay.game.util.RunMode;
 import com.bytebreakstudios.animagic.texture.AnimagicTexturePacker;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
-import static com.badlogic.gdx.Gdx.files;
+import java.io.File;
 
 public class Launcher {
 
-    public static Config conf = ConfigFactory.load();
+    public static Config conf = ConfigFactory.load("conf/application.conf");
 
     public static void main(String[] args) {
         LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
@@ -29,7 +27,10 @@ public class Launcher {
         }
         System.out.println("Run Mode: " + runMode);
         if (runMode == RunMode.DEV){
-            if (needToPack()) AnimagicTexturePacker.pack(files.internal("img/packable").file(), files.internal("img/packed").file());
+            if (needToPack()) {
+                System.out.println("Need to pack images");
+                AnimagicTexturePacker.pack(new File("src/main/resources/img/packable"), new File("src/main/resources/img/packed"));
+            } else System.out.println("Did not need to pack images");
         }
 
         new LwjglApplication(new MyGame(runMode), config);
@@ -42,26 +43,25 @@ public class Launcher {
 
     /**
      * Only run the texture packer if the atlas file is older than any of the files within the img/packable folder
-     * @return
      */
     private static boolean needToPack(){
-        FileHandle atlasFile = Gdx.files.internal("img/packed/packable.atlas");
+        File atlasFile = new File("src/main/resources/img/packed/main.atlas");
         if (!atlasFile.exists()) return true;
         long atlasFileModifiedDate = atlasFile.lastModified();
 
-        FileHandle packableFolder = Gdx.files.internal("img/packable");
+        File packableFolder = new File("src/main/resources/img/packable");
         if (!packableFolder.exists()) return false;
         long mostRecentLastModifiedDateInPacked = recursiveFileLastModified(packableFolder);
 
         return mostRecentLastModifiedDateInPacked > atlasFileModifiedDate;
     }
 
-    private static long recursiveFileLastModified(FileHandle f){
+    private static long recursiveFileLastModified(File f){
         if (f == null) return 0;
         else if (!f.exists()) return 0;
         else if (f.isDirectory()) {
             long mostRecent = 0;
-            for (FileHandle sub : f.list()){
+            for (File sub : f.listFiles()){
                 long curMod = recursiveFileLastModified(sub);
                 if (curMod > mostRecent) mostRecent = curMod;
             }

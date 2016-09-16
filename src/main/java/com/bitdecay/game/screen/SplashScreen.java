@@ -3,12 +3,15 @@ package com.bitdecay.game.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.bitdecay.game.Launcher;
 import com.bitdecay.game.MyGame;
 
@@ -51,6 +54,11 @@ public class SplashScreen implements Screen {
             runnables.add(r);
             if (isFirst) i.addAction(Actions.run(r));
         }
+
+        Label l = new Label("Press [space] to skip", new Skin(Gdx.files.classpath("skin/skin.json")));
+        l.setFontScale(2);
+        l.setColor(Color.WHITE);
+        stage.addActor(l);
     }
 
     @Override

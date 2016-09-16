@@ -58,6 +58,7 @@ public class MainMenuScreen implements Screen {
         stage.addActor(menu);
 
         Gdx.input.setInputProcessor(stage);
+        updateMenuSelection(0);
     }
 
     private Label buildNewMenuOption(String itemText, Runnable runnable){
@@ -76,7 +77,8 @@ public class MainMenuScreen implements Screen {
 
     @Override
     public void show() {
-        // SoundLibrary.loopMusic("ambientIntro");
+        // TODO: maybe play music here if the music from the intro is not still playing
+
         // animate the main menu when entering
         Action fadeIn = Actions.sequence(Actions.alpha(0),
                 Actions.delay(0.25f),
@@ -98,8 +100,8 @@ public class MainMenuScreen implements Screen {
 
 
     public void update(){
-        if (InputHelper.isKeyJustPressed(Input.Keys.UP, Input.Keys.LEFT)) updateMenuSelection(1);
-        else if (InputHelper.isKeyJustPressed(Input.Keys.DOWN, Input.Keys.RIGHT)) updateMenuSelection(-1);
+        if (InputHelper.isKeyJustPressed(Input.Keys.UP, Input.Keys.LEFT, Input.Keys.W, Input.Keys.A)) updateMenuSelection(-1);
+        else if (InputHelper.isKeyJustPressed(Input.Keys.DOWN, Input.Keys.RIGHT, Input.Keys.S, Input.Keys.D)) updateMenuSelection(1);
         else if (InputHelper.isKeyJustPressed(Input.Keys.ENTER, Input.Keys.SPACE)) makeSelection();
     }
 
@@ -116,7 +118,9 @@ public class MainMenuScreen implements Screen {
     }
 
     private void makeSelection(){
+        // TODO: Play a sound here
 
+        menuOptions.get(menuSelection).runnable.run();
     }
 
     private void updateMenuSelection(int change) {

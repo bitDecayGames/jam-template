@@ -21,14 +21,14 @@ public class MyGame extends Game {
 
     public void queueAssetsForLoad() {
         assetManager.setLoader(AnimagicTextureAtlas.class, new AnimagicTextureAtlasLoader(new InternalFileHandleResolver()));
-        assetManager.load("img/packed/packable.atlas", AnimagicTextureAtlas.class);
+        assetManager.load("img/packed/main.atlas", AnimagicTextureAtlas.class);
     }
 
     @Override
     public void create() {
         queueAssetsForLoad();
         assetManager.finishLoading();
-        atlas = assetManager.get("img/packed/packable.atlas", AnimagicTextureAtlas.class);
+        atlas = assetManager.get("img/packed/main.atlas", AnimagicTextureAtlas.class);
 
         if (runMode == RunMode.DEV) setScreen(new GameScreen(this));
         else if (runMode == RunMode.PROD) setScreen(new SplashScreen(this));
