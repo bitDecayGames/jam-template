@@ -1,0 +1,14 @@
+*.class
+.idea
+**/.idea/
+**.project
+**.classpath
+**/.settings/
+**/bin/
+**.DS_Store
+**/build/
+**/target
+**.iml
+classes
+
+src/main/resources/img/packed/

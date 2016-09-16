@@ -1,0 +1,215 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- TODO: enter the project name and version -->
+    <artifactId>project-name</artifactId>
+    <name>project-name</name>
+    <version>1.0</version>
+
+    <groupId>com.bitdecay</groupId>
+    <packaging>jar</packaging>
+
+    <properties>
+        <!-- TODO: put the actual main launcher class in here -->
+        <mainClass>com.bitdecay.ludum.dare.Launcher</mainClass>
+
+        <!-- these will change based on what the current version of the tools are -->
+        <jumpVersion>2.0</jumpVersion>
+        <animagicVersion>0.1-SNAPSHOT</animagicVersion>
+
+        <!-- these probably shouldn't change much -->
+        <gdxVersion>1.6.5</gdxVersion>
+        <log4jVersion>1.2.17</log4jVersion>
+        <jacksonVersion>2.6.1</jacksonVersion>
+        <commonsVersion>2.4</commonsVersion>
+    </properties>
+
+    <build>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>Executable Shade</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <transformers>
+                                <transformer
+                                        implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>${mainClass}</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.7</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/src/main/resources</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.4</version>
+                <configuration>
+                    <descriptor>assembly.xml</descriptor>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>create-archive</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <!-- Why do we need these jackson imports? animagic should bring them in... confusing -->
+        <!-- START JACKSON DEPENDENCIES -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jacksonVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jacksonVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jacksonVersion}</version>
+        </dependency>
+        <!-- END JACKSON DEPENDENCIES -->
+        <!-- START CONFIG DEPENDENCIES -->
+        <dependency>
+            <groupId>com.typesafe</groupId>
+            <artifactId>config</artifactId>
+            <version>1.3.0</version>
+        </dependency>
+        <!-- END CONFIG DEPENDENCIES -->
+        <!-- START CUSTOM TOOLS DEPENDENCIES -->
+        <dependency>
+            <groupId>com.bitdecay</groupId>
+            <artifactId>jump-common</artifactId>
+            <version>${jumpVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bitdecay</groupId>
+            <artifactId>jump-core</artifactId>
+            <version>${jumpVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bitdecay</groupId>
+            <artifactId>jump-gdx</artifactId>
+            <version>${jumpVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bitdecay</groupId>
+            <artifactId>jump-leveleditor</artifactId>
+            <version>${jumpVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.bytebreakstudios</groupId>
+            <artifactId>animagic</artifactId>
+            <version>${animagicVersion}</version>
+        </dependency>
+        <!-- END CUSTOM TOOLS DEPENDENCIES-->
+        <!-- START GDX DEPENDENCIES -->
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx</artifactId>
+            <version>${gdxVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-backend-lwjgl</artifactId>
+            <version>${gdxVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-backend-jglfw</artifactId>
+            <version>${gdxVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-backend-headless</artifactId>
+            <version>${gdxVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-controllers</artifactId>
+            <version>${gdxVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-controllers-desktop</artifactId>
+            <version>${gdxVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-tools</artifactId>
+            <version>${gdxVersion}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-controllers-platform</artifactId>
+            <version>${gdxVersion}</version>
+            <classifier>natives-desktop</classifier>
+        </dependency>
+        <dependency>
+            <groupId>com.badlogicgames.gdx</groupId>
+            <artifactId>gdx-platform</artifactId>
+            <version>${gdxVersion}</version>
+            <classifier>natives-desktop</classifier>
+        </dependency>
+        <!-- END GDX DEPENDENCIES -->
+    </dependencies>
+</project>
