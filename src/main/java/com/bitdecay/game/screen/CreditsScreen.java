@@ -5,13 +5,16 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.Align;
+import com.bitdecay.game.Launcher;
 import com.bitdecay.game.MyGame;
+import com.bitdecay.game.util.InputHelper;
 
 public class CreditsScreen implements Screen {
 
@@ -45,7 +48,7 @@ public class CreditsScreen implements Screen {
 
         Skin skin = new Skin(Gdx.files.classpath("skin/skin.json"));
 
-        background = new Image(MyGame.atlas.findRegion("bg/space"));
+        background = new Image(new Texture(Gdx.files.classpath(Launcher.conf.getString("credits.background"))));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         lblTitle = new Label(" Credits", skin);
@@ -55,26 +58,25 @@ public class CreditsScreen implements Screen {
         lblTitle.setColor(Color.SKY);
 
         lblBack = new Label("Press esc/B to go back", skin);
-        lblBack.setFontScale(5);
+        lblBack.setFontScale(2);
         lblBack.setFillParent(true);
         lblBack.setAlignment(Align.bottom, Align.right);
         lblBack.setColor(Color.GRAY);
 
-        lblCredits = new Label("Oculomancers (Art): " + SPACE_AFTER_TITLE +
-                "Erik \"Groovemaster\"\n Meredith" + SPACE_AFTER_NAME +
-                "Logan \"New York is too\nfar away\" Moore" + SPACE_AFTER_TITLE +
-                "Bitwizards (Dev):" + SPACE_AFTER_TITLE +
-                "Mike \"Font Destroyer\"\n Wingfield" + SPACE_AFTER_NAME +
-                "Jake \"Donuts & Whiskey\"\n Kabob-Thompski" + SPACE_AFTER_NAME +
-                "Jake \"Luke\" Fisher" + SPACE_AFTER_NAME +
-                "Luke \"Jake\" Fisher" + SPACE_AFTER_NAME +
-                "Tristan \"El Hombre Nuevo\"\n Havelick" + SPACE_AFTER_TITLE +
-                "Soundscapes:" + SPACE_AFTER_TITLE +
-                "Logan \n \"Yes, he's two people\"\n Moore",
+        // ///////////////////////////////////////////////
+        // Add new sections to the credits here
+        // ///////////////////////////////////////////////
+        StringBuilder creditsStr = new StringBuilder();
+        addCreditTitleAndNames(creditsStr, "Programming: ", "credits.developers");
+        addCreditTitleAndNames(creditsStr, "Art: ", "credits.artists");
+        addCreditTitleAndNames(creditsStr, "Sound: ", "credits.sound");
+        addCreditTitleAndNames(creditsStr, "", "credits.external");
+
+        lblCredits = new Label(creditsStr.toString(),
                 skin);
-        lblCredits.setFontScale(6);
-        lblCredits.setFillParent(true);
-        lblCredits.setAlignment(Align.center);
+        lblCredits.setFontScale(Launcher.conf.getInt("credits.fontSize"));
+        lblCredits.setBounds(0, -Gdx.graphics.getHeight(), Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        lblCredits.setAlignment(Align.center, Align.bottom);
         lblCredits.setColor(Color.WHITE);
 
 
@@ -86,42 +88,37 @@ public class CreditsScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
     }
 
+    private void addCreditTitleAndNames(StringBuilder sb, String title, String names){
+        sb.append(title).append(SPACE_AFTER_TITLE);
+        Launcher.conf.getStringList(names).forEach(name -> sb.append(name).append(SPACE_AFTER_NAME));
+        sb.append(SPACE_AFTER_TITLE);
+    }
+
     @Override
     public void show() {
-//         animate the main menu when entering
         lblCredits.addAction(Actions.sequence(
                 Actions.moveBy(0, -(Gdx.graphics.getHeight()*1.5f)),
                 Actions.moveBy(0, Gdx.graphics.getHeight() * 4, 30),
-                Actions.run(new Runnable() {
-                    @Override
-                    public void run() {
-                        nextScreen();
-                    }
-                })
+                Actions.run(this::nextScreen)
 
         ));
     }
 
     @Override
     public void render(float delta) {
-        update(delta);
         Gdx.gl.glClearColor(0f, 0f, 0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         stage.act();
         stage.draw();
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) nextScreen();
+        if (InputHelper.isKeyJustPressed(Input.Keys.SPACE, Input.Keys.ESCAPE, Input.Keys.B, Input.Keys.BACKSPACE)) nextScreen();
     }
 
     public void nextScreen(){
         game.setScreen(new MainMenuScreen(game));
     }
 
-
-    public void update(float delta){
-
-    }
 
     @Override
     public void resize(int width, int height) {
