@@ -1,0 +1,102 @@
+package com.bitdecay.game.screen;
+
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.scenes.scene2d.Action;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Image;
+import com.bitdecay.game.Launcher;
+import com.bitdecay.game.MyGame;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class SplashScreen implements Screen {
+
+    private List<Runnable> runnables = new ArrayList<>();
+    private Stage stage;
+    private MyGame game;
+
+    public SplashScreen(MyGame game){
+        this.game = game;
+        stage = new Stage();
+        List<String> wallpaperNames = Launcher.conf.getStringList("splash.wallpapers");
+        for (String wallpaperName : wallpaperNames){
+            Texture t = new Texture(Gdx.files.classpath(wallpaperName));
+            Image i = new Image(t);
+            i.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            stage.addActor(i);
+            i.addAction(Actions.alpha(0));
+            int runnableIndex = runnables.size();
+            boolean isFirst = runnables.isEmpty();
+            boolean isLast = runnableIndex + 1 >= wallpaperNames.size();
+            Runnable r = () -> {
+                // if it is the first wallpaper, wait just a bit before starting
+                Action firstBuffer = isFirst ? Actions.delay(0.25f) : Actions.delay(0);
+                // fade the wallpaper in and then out
+                Action fadeInAndOut = Actions.sequence(
+                    Actions.fadeIn(2f),
+                    Actions.delay(2f),
+                    Actions.fadeOut(2f));
+                // if it is the last wallpaper, then go to the next screen when finished
+                // if it is not the last wallpaper, then go to the next wallpaper when finished
+                Action lastRunner = isLast ? Actions.run(this::nextScreen) : Actions.run(runnables.get(runnableIndex + 1));
+                // add all the actions to the actor
+                i.addAction(Actions.sequence(firstBuffer, fadeInAndOut, lastRunner));
+            };
+            runnables.add(r);
+            if (isFirst) i.addAction(Actions.run(r));
+        }
+    }
+
+    @Override
+    public void show() {
+//        SoundLibrary.loopMusic("ambientIntro");
+        // TODO add intro music.
+    }
+
+    @Override
+    public void render(float delta) {
+        MyGame.assetManager.update();
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE) || Gdx.input.isKeyJustPressed(Input.Keys.ENTER) || Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) nextScreen();
+
+        stage.act();
+        stage.draw();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void hide() {
+        dispose();
+    }
+
+    @Override
+    public void dispose() {
+        stage.dispose();
+    }
+
+    private void nextScreen() {
+        game.setScreen(new MainMenuScreen(game));
+    }
+}

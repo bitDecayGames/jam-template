@@ -1,4 +1,4 @@
-package com.bitdecay.game.utils;
+package com.bitdecay.game.util;
 
 public enum RunMode {
     DEV,

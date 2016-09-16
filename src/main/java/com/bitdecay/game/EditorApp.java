@@ -1,8 +1,9 @@
 package com.bitdecay.game;
 
 import com.badlogic.gdx.Game;
+import com.bitdecay.game.screen.GameScreen;
+import com.bitdecay.game.util.RunMode;
 import com.bitdecay.jump.leveleditor.render.LevelEditor;
-import com.bitdecay.game.utils.RunMode;
 
 public class EditorApp extends Game {
 

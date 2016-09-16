@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.badlogic.gdx.files.FileHandle;
-import com.bitdecay.game.utils.RunMode;
+import com.bitdecay.game.util.RunMode;
 import com.bytebreakstudios.animagic.texture.AnimagicTexturePacker;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;

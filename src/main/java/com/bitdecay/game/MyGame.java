@@ -3,10 +3,9 @@ package com.bitdecay.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
-import com.bitdecay.jump.geom.BitPoint;
-import com.bitdecay.ludum.dare.screens.GameScreen;
-import com.bitdecay.ludum.dare.screens.OpeningSceneCutScreen;
-import com.bitdecay.game.utils.RunMode;
+import com.bitdecay.game.screen.GameScreen;
+import com.bitdecay.game.screen.SplashScreen;
+import com.bitdecay.game.util.RunMode;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlas;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlasLoader;
 
@@ -32,6 +31,6 @@ public class MyGame extends Game {
         atlas = assetManager.get("img/packed/packable.atlas", AnimagicTextureAtlas.class);
 
         if (runMode == RunMode.DEV) setScreen(new GameScreen(this));
-        else if (runMode == RunMode.PROD) setScreen(new JamSplashScreen(this));
+        else if (runMode == RunMode.PROD) setScreen(new SplashScreen(this));
     }
 }
