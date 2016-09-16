@@ -4,7 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.bitdecay.game.Launcher;
 import com.bitdecay.game.MyGame;
+import com.bitdecay.game.util.SoundLibrary;
 import com.bitdecay.jump.collision.BitWorld;
 import com.bitdecay.jump.gdx.level.EditorIdentifierObject;
 import com.bitdecay.jump.gdx.level.RenderableLevelObject;
@@ -23,6 +25,7 @@ public class GameScreen implements Screen, EditorHook {
 
     @Override
     public void show() {
+        SoundLibrary.stopMusic(Launcher.conf.getString("splash.music"));
     }
 
     @Override

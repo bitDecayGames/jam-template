@@ -14,6 +14,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.bitdecay.game.Launcher;
 import com.bitdecay.game.MyGame;
+import com.bitdecay.game.util.SoundLibrary;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,8 +64,7 @@ public class SplashScreen implements Screen {
 
     @Override
     public void show() {
-//        SoundLibrary.loopMusic("ambientIntro");
-        // TODO add intro music.
+        SoundLibrary.loopMusic(Launcher.conf.getString("splash.music"));
     }
 
     @Override

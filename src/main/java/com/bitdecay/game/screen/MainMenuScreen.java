@@ -19,6 +19,7 @@ import com.badlogic.gdx.utils.Align;
 import com.bitdecay.game.Launcher;
 import com.bitdecay.game.MyGame;
 import com.bitdecay.game.util.InputHelper;
+import com.bitdecay.game.util.SoundLibrary;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,9 +48,14 @@ public class MainMenuScreen implements Screen {
 
         menu = new Table();
         menu.setFillParent(true);
+
+        // ////////////////////////////////////////////////
+        // Here is where you add more menu options
+        // ////////////////////////////////////////////////
         menu.add(buildNewMenuOption("Start", this::gotoGame)).height(60).padBottom(20).padTop(150).row();
         menu.add(buildNewMenuOption("Credits", this::gotoCredits)).height(60).padBottom(20).row();
         menu.add(buildNewMenuOption("Quit", this::exitGame)).height(60).padBottom(20).row();
+
         menu.align(Align.center);
         menu.padLeft(300);
         menu.padBottom(200);
@@ -118,7 +124,7 @@ public class MainMenuScreen implements Screen {
     }
 
     private void makeSelection(){
-        // TODO: Play a sound here
+        SoundLibrary.playSound(Launcher.conf.getString("menu.selectSoundFx"));
 
         menuOptions.get(menuSelection).runnable.run();
     }
