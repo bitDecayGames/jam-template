@@ -100,7 +100,6 @@ public class CreditsScreen implements Screen {
                 Actions.moveBy(0, -(Gdx.graphics.getHeight()*1.5f)),
                 Actions.moveBy(0, Gdx.graphics.getHeight() * 4, 30),
                 Actions.run(this::nextScreen)
-
         ));
     }
 
