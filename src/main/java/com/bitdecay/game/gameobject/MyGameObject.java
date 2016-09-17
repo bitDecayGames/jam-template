@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 public class MyGameObject implements ICleanup {
 
@@ -19,7 +18,7 @@ public class MyGameObject implements ICleanup {
     private List<AbstractComponent> componentsToRemove = new ArrayList<>();
 
     public boolean hasComponents(Class<?>... componentClasses){
-        return components.stream().map(Object::getClass).collect(Collectors.toList()).containsAll(Arrays.asList(componentClasses));
+        return Arrays.stream(componentClasses).filter(componentClass -> components.stream().filter(componentClass::isInstance).findFirst().isPresent()).findFirst().isPresent();
     }
 
     public boolean hasComponent(Class<?> componentClass){
@@ -56,7 +55,7 @@ public class MyGameObject implements ICleanup {
     }
 
     @Override
-    public boolean dirty() {
+    public boolean isDirty() {
         return dirty;
     }
 

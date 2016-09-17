@@ -1,12 +1,12 @@
 package com.bitdecay.game.system;
 
-import com.bitdecay.game.MyGame;
 import com.bitdecay.game.gameobject.MyGameObject;
+import com.bitdecay.game.room.AbstractRoom;
 
 public abstract class AbstractForEachGobSystem extends AbstractSystem {
 
-    public AbstractForEachGobSystem(MyGame game) {
-        super(game);
+    public AbstractForEachGobSystem(AbstractRoom room) {
+        super(room);
     }
 
     @Override

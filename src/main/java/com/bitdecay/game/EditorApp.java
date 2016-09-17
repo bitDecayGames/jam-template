@@ -9,7 +9,7 @@ public class EditorApp extends Game {
 
     @Override
     public void create() {
-        // Change to our game screen
+        // Change to our room screen
         MyGame game = new MyGame(RunMode.DEV);
         game.create();
         GameScreen screen = new GameScreen(game);

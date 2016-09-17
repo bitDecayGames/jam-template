@@ -1,12 +1,12 @@
 package com.bitdecay.game.system;
 
-import com.bitdecay.game.MyGame;
 import com.bitdecay.game.gameobject.MyGameObject;
+import com.bitdecay.game.room.AbstractRoom;
 import com.bitdecay.game.trait.IUpdate;
 
 public class UpdateSystem extends AbstractForEachGobSystem {
-    public UpdateSystem(MyGame game) {
-        super(game);
+    public UpdateSystem(AbstractRoom room) {
+        super(room);
     }
 
     @Override

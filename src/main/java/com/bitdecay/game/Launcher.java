@@ -42,10 +42,10 @@ public class Launcher {
     }
 
     /**
-     * Only run the texture packer if the atlas file is older than any of the files within the img/packable folder
+     * Only run the texture packer if the ATLAS file is older than any of the files within the img/packable folder
      */
     private static boolean needToPack(){
-        File atlasFile = new File("src/main/resources/img/packed/main.atlas");
+        File atlasFile = new File("src/main/resources/img/packed/main.ATLAS");
         if (!atlasFile.exists()) return true;
         long atlasFileModifiedDate = atlasFile.lastModified();
 

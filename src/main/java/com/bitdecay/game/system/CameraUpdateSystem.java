@@ -1,12 +1,12 @@
 package com.bitdecay.game.system;
 
-import com.bitdecay.game.MyGame;
 import com.bitdecay.game.gameobject.MyGameObject;
+import com.bitdecay.game.room.AbstractRoom;
 import com.bitdecay.game.trait.IUpdateWithCamera;
 
 public class CameraUpdateSystem extends AbstractForEachGobSystem {
-    public CameraUpdateSystem(MyGame game) {
-        super(game);
+    public CameraUpdateSystem(AbstractRoom room) {
+        super(room);
     }
 
     @Override
@@ -16,7 +16,7 @@ public class CameraUpdateSystem extends AbstractForEachGobSystem {
 
     @Override
     protected void forEach(float delta, MyGameObject gob) {
-        gob.forEach(IUpdateWithCamera.class, comp -> comp.update(delta, game.camera));
+        gob.forEach(IUpdateWithCamera.class, comp -> comp.update(delta, room.camera));
     }
 
 }

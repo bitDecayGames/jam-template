@@ -1,109 +1,11 @@
 {
   "tileSize" : 16,
-  "gridObjects" : [ [ {
-    "rect" : {
-      "xy" : {
-        "x" : -48.0,
-        "y" : -32.0
-      },
-      "width" : 16.0,
-      "height" : 16.0
-    },
-    "uuid" : "0b8715cc-f2cf-42fc-afa0-38f942bf43d6",
-    "material" : 2,
-    "renderNValue" : 2,
-    "collideNValue" : 2,
-    "oneway" : false
-  } ], [ {
-    "rect" : {
-      "xy" : {
-        "x" : -32.0,
-        "y" : -32.0
-      },
-      "width" : 16.0,
-      "height" : 16.0
-    },
-    "uuid" : "b31f29a7-2ebe-4706-b29d-b9dbf3a8c431",
-    "material" : 2,
-    "renderNValue" : 10,
-    "collideNValue" : 10,
-    "oneway" : false
-  } ], [ {
-    "rect" : {
-      "xy" : {
-        "x" : -16.0,
-        "y" : -32.0
-      },
-      "width" : 16.0,
-      "height" : 16.0
-    },
-    "uuid" : "ff42d1c2-acda-4223-895f-3c5c692ef93b",
-    "material" : 2,
-    "renderNValue" : 10,
-    "collideNValue" : 10,
-    "oneway" : false
-  } ], [ {
-    "rect" : {
-      "xy" : {
-        "x" : 0.0,
-        "y" : -32.0
-      },
-      "width" : 16.0,
-      "height" : 16.0
-    },
-    "uuid" : "242e7334-f96c-488b-b2a8-1b3e65d4f7a3",
-    "material" : 2,
-    "renderNValue" : 10,
-    "collideNValue" : 10,
-    "oneway" : false
-  } ], [ {
-    "rect" : {
-      "xy" : {
-        "x" : 16.0,
-        "y" : -32.0
-      },
-      "width" : 16.0,
-      "height" : 16.0
-    },
-    "uuid" : "1dd94bbe-cb1d-43d9-b6bd-dd72e5d26146",
-    "material" : 2,
-    "renderNValue" : 10,
-    "collideNValue" : 10,
-    "oneway" : false
-  } ], [ {
-    "rect" : {
-      "xy" : {
-        "x" : 32.0,
-        "y" : -32.0
-      },
-      "width" : 16.0,
-      "height" : 16.0
-    },
-    "uuid" : "e49a24d1-fcc3-43cb-80b9-4acd12eaaf99",
-    "material" : 2,
-    "renderNValue" : 10,
-    "collideNValue" : 10,
-    "oneway" : false
-  } ], [ {
-    "rect" : {
-      "xy" : {
-        "x" : 48.0,
-        "y" : -32.0
-      },
-      "width" : 16.0,
-      "height" : 16.0
-    },
-    "uuid" : "8cc68e7f-b495-4325-9fda-f12ba9e2ac36",
-    "material" : 2,
-    "renderNValue" : 8,
-    "collideNValue" : 8,
-    "oneway" : false
-  } ] ],
+  "gridObjects" : [[]],
   "otherObjects" : [ "java.util.ArrayList", [ ] ],
   "triggers" : [ "java.util.ArrayList", [ ] ],
   "gridOffset" : {
-    "x" : -3,
-    "y" : -2
+    "x" : 0,
+    "y" : 0
   },
   "theme" : 0
 }

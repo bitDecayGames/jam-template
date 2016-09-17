@@ -9,7 +9,7 @@ This template project is for use when trying to set up a new project with Jump. 
 2. An entity-component system with generic components
 3. A few helper classes that seem to be needed in most games we build
 
-It does not contain very much actual game code.  Most of that is left up to you to define and implement.  This is just a starting point.
+It does not contain very much actual room code.  Most of that is left up to you to define and implement.  This is just a starting point.
 
 ## Install
 

@@ -1,12 +1,15 @@
 package com.bitdecay.game.system;
 
+import com.bitdecay.game.gameobject.MyGameObject;
 import com.bitdecay.game.trait.ICleanup;
+import com.bitdecay.game.trait.IProcessable;
+import com.bitdecay.game.trait.IRefreshable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class SystemManager implements ICleanup{
+public class SystemManager implements ICleanup, IRefreshable, IProcessable {
 
     private boolean dirty = false;
     private final List<AbstractSystem> systems = new ArrayList<>();
@@ -33,7 +36,7 @@ public class SystemManager implements ICleanup{
     }
 
     @Override
-    public boolean dirty() {
+    public boolean isDirty() {
         return dirty;
     }
 
@@ -44,5 +47,15 @@ public class SystemManager implements ICleanup{
         systemsToAdd.forEach(systems::add);
         systemsToAdd.clear();
         dirty = false;
+    }
+
+    @Override
+    public void refresh(List<MyGameObject> gobs) {
+        systems.forEach(sys -> sys.refresh(gobs));
+    }
+
+    @Override
+    public void process(float delta) {
+        systems.forEach(sys -> sys.process(delta));
     }
 }

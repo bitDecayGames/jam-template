@@ -3,50 +3,36 @@ package com.bitdecay.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.bitdecay.game.camera.FollowOrthoCamera;
-import com.bitdecay.game.gameobject.MyGameObject;
 import com.bitdecay.game.screen.GameScreen;
 import com.bitdecay.game.screen.SplashScreen;
-import com.bitdecay.game.system.SystemManager;
+import com.bitdecay.game.trait.ICanSetScreen;
 import com.bitdecay.game.util.RunMode;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlas;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlasLoader;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MyGame extends Game {
+public class MyGame extends Game implements ICanSetScreen{
     // statics
-    public static AssetManager assetManager = new AssetManager();
-    public static AnimagicTextureAtlas atlas;
-
-    // finals
-    public final RunMode runMode;
-    public final List<MyGameObject> gobs = new ArrayList<>();
-    public final SpriteBatch spriteBatch = new SpriteBatch();
-    public final SystemManager systemManager = new SystemManager(); // TODO: figure out where to put the gobs
-
-    // locals
-    public FollowOrthoCamera camera;
+    public static AssetManager ASSET_MANAGER = new AssetManager();
+    public static AnimagicTextureAtlas ATLAS;
+    public static RunMode RUN_MODE;
 
     public MyGame(RunMode runMode){
         super();
-        this.runMode = runMode;
+        MyGame.RUN_MODE = runMode;
     }
 
     public void queueAssetsForLoad() {
-        assetManager.setLoader(AnimagicTextureAtlas.class, new AnimagicTextureAtlasLoader(new InternalFileHandleResolver()));
-        assetManager.load("img/packed/main.atlas", AnimagicTextureAtlas.class);
+        ASSET_MANAGER.setLoader(AnimagicTextureAtlas.class, new AnimagicTextureAtlasLoader(new InternalFileHandleResolver()));
+        ASSET_MANAGER.load("img/packed/main.atlas", AnimagicTextureAtlas.class);
     }
 
     @Override
     public void create() {
         queueAssetsForLoad();
-        assetManager.finishLoading();
-        atlas = assetManager.get("img/packed/main.atlas", AnimagicTextureAtlas.class);
+        ASSET_MANAGER.finishLoading();
+        ATLAS = ASSET_MANAGER.get("img/packed/main.atlas", AnimagicTextureAtlas.class);
 
-        if (runMode == RunMode.DEV) setScreen(new GameScreen(this));
-        else if (runMode == RunMode.PROD) setScreen(new SplashScreen(this));
+        if (RUN_MODE == RunMode.DEV) setScreen(new GameScreen(this));
+        else if (RUN_MODE == RunMode.PROD) setScreen(new SplashScreen(this));
     }
 }
