@@ -3,16 +3,32 @@ package com.bitdecay.game;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.bitdecay.game.camera.FollowOrthoCamera;
+import com.bitdecay.game.gameobject.MyGameObject;
 import com.bitdecay.game.screen.GameScreen;
 import com.bitdecay.game.screen.SplashScreen;
+import com.bitdecay.game.system.SystemManager;
 import com.bitdecay.game.util.RunMode;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlas;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlasLoader;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyGame extends Game {
+    // statics
     public static AssetManager assetManager = new AssetManager();
     public static AnimagicTextureAtlas atlas;
-    public RunMode runMode;
+
+    // finals
+    public final RunMode runMode;
+    public final List<MyGameObject> gobs = new ArrayList<>();
+    public final SpriteBatch spriteBatch = new SpriteBatch();
+    public final SystemManager systemManager = new SystemManager(); // TODO: figure out where to put the gobs
+
+    // locals
+    public FollowOrthoCamera camera;
 
     public MyGame(RunMode runMode){
         super();
