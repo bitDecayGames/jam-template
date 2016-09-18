@@ -18,7 +18,7 @@ public class MyGameObject implements ICleanup {
     private List<AbstractComponent> componentsToRemove = new ArrayList<>();
 
     public boolean hasComponents(Class<?>... componentClasses){
-        return Arrays.stream(componentClasses).filter(componentClass -> components.stream().filter(componentClass::isInstance).findFirst().isPresent()).findFirst().isPresent();
+        return ! Arrays.stream(componentClasses).filter(componentClass -> ! components.stream().filter(componentClass::isInstance).findFirst().isPresent()).findFirst().isPresent();
     }
 
     public boolean hasComponent(Class<?> componentClass){
@@ -67,5 +67,10 @@ public class MyGameObject implements ICleanup {
         componentsToAdd.forEach(components::add);
         componentsToAdd.clear();
         dirty = false;
+    }
+
+    @Override
+    public String toString(){
+        return components.toString();
     }
 }

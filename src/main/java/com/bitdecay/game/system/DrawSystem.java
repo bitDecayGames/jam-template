@@ -14,6 +14,7 @@ public class DrawSystem extends AbstractSystem {
 
     @Override
     public void process(float delta) {
+        room.spriteBatch.setProjectionMatrix(room.camera.combined);
         room.spriteBatch.begin();
         gobs.forEach(gob -> gob.forEach(IDraw.class, drawable -> drawable.draw(room.spriteBatch)));
         room.spriteBatch.end();

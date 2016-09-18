@@ -18,6 +18,7 @@ public class ShapeDrawSystem extends AbstractSystem {
 
     @Override
     public void process(float delta) {
+        room.shapeRenderer.setProjectionMatrix(room.camera.combined);
         room.shapeRenderer.begin();
         gobs.forEach(gob ->
                 gob.forEach(IShapeDraw.class, drawable ->

@@ -11,7 +11,7 @@ public class TimerSystem extends AbstractForEachGobSystem {
 
     @Override
     protected boolean validateGob(MyGameObject gob) {
-        return gob.hasComponents(TimerComponent.class) && ! gob.getComponent(TimerComponent.class).get().done;
+        return gob.hasComponent(TimerComponent.class) && ! gob.getComponent(TimerComponent.class).get().done;
     }
 
     @Override

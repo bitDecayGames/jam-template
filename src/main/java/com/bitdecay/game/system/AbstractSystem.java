@@ -22,9 +22,15 @@ public abstract class AbstractSystem implements IRefreshable, IProcessable {
     public final void refresh(List<MyGameObject> gobs){
         this.gobs.clear();
         this.gobs.addAll(gobs.stream().filter(this::validateGob).collect(Collectors.toList()));
+        System.out.println("Refresh: " + this + " " + this.gobs);
     }
 
     protected abstract boolean validateGob(MyGameObject gob);
 
     public abstract void process(float delta);
+
+    @Override
+    public String toString(){
+        return this.getClass().getSimpleName();
+    }
 }

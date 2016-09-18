@@ -3,7 +3,7 @@ package com.bitdecay.game.camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
-import com.bitdecay.game.util.CRectangle;
+import com.bitdecay.game.util.RectangleExt;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ public class FollowOrthoCamera extends OrthographicCamera {
     private float targetZoom = 0.1f;
     private Vector2 targetPosition = new Vector2(0, 0);
 
-    private CRectangle window;
+    private RectangleExt window;
     private float originalWidth = 0;
     private float widthRatio = 0;
     private float heightRatio = 0;
@@ -51,7 +51,7 @@ public class FollowOrthoCamera extends OrthographicCamera {
         originalWidth = width;
         widthRatio = height / width;
         heightRatio = width / height;
-        window = new CRectangle(0, 0, width, height);
+        window = new RectangleExt(0, 0, width, height);
     }
 
     public void addFollowPoint(Vector2 point){

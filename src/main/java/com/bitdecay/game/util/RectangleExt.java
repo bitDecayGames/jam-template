@@ -10,7 +10,7 @@ import com.badlogic.gdx.math.Vector2;
  * @copyright Nov 4, 2014
  *
  */
-public class CRectangle
+public class RectangleExt
 {
     public float x = 0;
     public float y = 0;
@@ -24,7 +24,7 @@ public class CRectangle
      *
      * @param rectangle
      */
-    public CRectangle(Rectangle rectangle)
+    public RectangleExt(Rectangle rectangle)
     {
         if (rectangle == null)
         {
@@ -42,7 +42,7 @@ public class CRectangle
      * @param width
      * @param height
      */
-    public CRectangle(float x, float y, float width, float height)
+    public RectangleExt(float x, float y, float width, float height)
     {
         initialize(x, y, width, height, new Vector2(0, 0), 0);
     }
@@ -55,7 +55,7 @@ public class CRectangle
      * @param height
      * @param origin
      */
-    public CRectangle(float x, float y, float width, float height, Vector2 origin)
+    public RectangleExt(float x, float y, float width, float height, Vector2 origin)
     {
         initialize(x, y, width, height, origin, 0);
     }
@@ -71,7 +71,7 @@ public class CRectangle
      * @param origin
      * @param rotation
      */
-    public CRectangle(float x, float y, float width, float height, Vector2 origin, float rotation)
+    public RectangleExt(float x, float y, float width, float height, Vector2 origin, float rotation)
     {
         initialize(x, y, width, height, origin, rotation);
     }
@@ -86,7 +86,7 @@ public class CRectangle
      * @param height
      * @param rotation
      */
-    public CRectangle(float x, float y, float width, float height, float rotation)
+    public RectangleExt(float x, float y, float width, float height, float rotation)
     {
         initialize(x, y, width, height, new Vector2(0, 0), rotation);
     }
@@ -96,8 +96,8 @@ public class CRectangle
      *
      * @return
      */
-    public static CRectangle empty() {
-        return new CRectangle(0, 0, 0, 0);
+    public static RectangleExt empty() {
+        return new RectangleExt(0, 0, 0, 0);
     }
 
     /**
@@ -167,7 +167,7 @@ public class CRectangle
     /**
      * Sets the origin at the center of the rectangle
      */
-    public CRectangle setOriginAtCenter()
+    public RectangleExt setOriginAtCenter()
     {
         origin = localCenter();
         return this;
@@ -261,7 +261,7 @@ public class CRectangle
      */
     public boolean contains(Rectangle rectangle)
     {
-        return contains(new CRectangle(rectangle));
+        return contains(new RectangleExt(rectangle));
     }
 
 
@@ -271,7 +271,7 @@ public class CRectangle
      * @param rectangle
      * @return
      */
-    public boolean contains(CRectangle rectangle)
+    public boolean contains(RectangleExt rectangle)
     {
         Vector2[] points = rectangle.points();
         for (int i = 0; i < points.length; i++)
@@ -287,7 +287,7 @@ public class CRectangle
      * @param rectangle
      * @return
      */
-    public boolean intersects(CRectangle rectangle)
+    public boolean intersects(RectangleExt rectangle)
     {
         Vector2[] theirPoints = rectangle.points();
         Vector2[] myPoints = points();
@@ -341,7 +341,7 @@ public class CRectangle
      */
     public boolean intersects(Rectangle rectangle)
     {
-        return intersects(new CRectangle(rectangle));
+        return intersects(new RectangleExt(rectangle));
     }
 
 
@@ -351,7 +351,7 @@ public class CRectangle
      * @param rectangle
      * @return
      */
-    public boolean overlaps(CRectangle rectangle)
+    public boolean overlaps(RectangleExt rectangle)
     {
         Vector2[] theirPoints = rectangle.points();
         Vector2[] myPoints = points();
@@ -380,7 +380,7 @@ public class CRectangle
      */
     public boolean overlaps(Rectangle rectangle)
     {
-        return overlaps(new CRectangle(rectangle));
+        return overlaps(new RectangleExt(rectangle));
     }
 
 
@@ -414,7 +414,7 @@ public class CRectangle
      * @param rectangle
      * @return
      */
-    public Rectangle intersection(CRectangle rectangle)
+    public Rectangle intersection(RectangleExt rectangle)
     {
         return intersection(rectangle.rect());
     }
@@ -424,9 +424,9 @@ public class CRectangle
      * Creates a deep copy clone of this rectangle (same as cpy)
      */
     @Override
-    public CRectangle clone()
+    public RectangleExt clone()
     {
-        CRectangle clone = new CRectangle(x, y, width, height, origin.cpy(), rotation);
+        RectangleExt clone = new RectangleExt(x, y, width, height, origin.cpy(), rotation);
         return clone;
     }
 
@@ -434,7 +434,7 @@ public class CRectangle
     /**
      * Creates a deep copy clone of this rectangle (same as clone)
      */
-    public CRectangle cpy()
+    public RectangleExt cpy()
     {
         return clone();
     }

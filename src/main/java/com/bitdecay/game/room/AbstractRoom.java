@@ -33,7 +33,7 @@ public abstract class AbstractRoom implements IUpdate, IDraw, IHasScreenSize, IC
 
     public final SpriteBatch spriteBatch = new SpriteBatch();
     public final ShapeRenderer shapeRenderer = new ShapeRenderer();
-    public final FollowOrthoCamera camera = new FollowOrthoCamera(Launcher.conf.getInt("resolution.camera.width"), Launcher.conf.getInt("resolution.camera.width"));
+    public final FollowOrthoCamera camera = new FollowOrthoCamera(Launcher.conf.getInt("resolution.camera.width"), Launcher.conf.getInt("resolution.camera.height"));
 
     protected final LibGDXWorldRenderer worldRenderer = new LibGDXWorldRenderer();
     protected final BitWorld world = new BitWorld();
@@ -44,6 +44,7 @@ public abstract class AbstractRoom implements IUpdate, IDraw, IHasScreenSize, IC
         camera.maxZoom = new Double(Launcher.conf.getDouble("resolution.camera.maxZoom")).floatValue();
         camera.minZoom = new Double(Launcher.conf.getDouble("resolution.camera.minZoom")).floatValue();
         camera.snapSpeed = new Double(Launcher.conf.getDouble("resolution.camera.snapSpeed")).floatValue();
+        camera.buffer = 100;
 
         world.setGravity(new Double(Launcher.conf.getDouble("world.gravity.x")).floatValue(), new Double(Launcher.conf.getDouble("world.gravity.y")).floatValue());
 
