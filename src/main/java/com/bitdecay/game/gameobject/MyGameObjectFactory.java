@@ -2,8 +2,8 @@ package com.bitdecay.game.gameobject;
 
 import com.badlogic.gdx.graphics.Color;
 import com.bitdecay.game.component.DebugCircleComponent;
-import com.bitdecay.game.component.DemoMovementComponent;
 import com.bitdecay.game.component.PositionComponent;
+import com.bitdecay.game.demo.DemoMovementComponent;
 
 public class MyGameObjectFactory {
     private MyGameObjectFactory(){}
