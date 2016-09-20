@@ -5,13 +5,13 @@ import com.bitdecay.game.component.PositionComponent;
 import com.bitdecay.game.component.TimerComponent;
 import com.bitdecay.game.gameobject.MyGameObject;
 import com.bitdecay.game.room.AbstractRoom;
-import com.bitdecay.game.system.AbstractForEachGobSystem;
+import com.bitdecay.game.system.AbstractForEachUpdatableSystem;
 import com.bitdecay.game.util.InputHelper;
 
 /**
  * This is how a system SHOULD look.  All of the game logic is contained within the system.
  */
-public class DemoMovementSystem extends AbstractForEachGobSystem {
+public class DemoMovementSystem extends AbstractForEachUpdatableSystem {
 
     private float SPEED = 4;
 
@@ -27,10 +27,10 @@ public class DemoMovementSystem extends AbstractForEachGobSystem {
     @Override
     protected void forEach(float delta, MyGameObject gob) {
         gob.forEach(PositionComponent.class, position -> {
-            if (InputHelper.isKeyPressed(Input.Keys.UP)) position.y += SPEED;
-            else if (InputHelper.isKeyPressed(Input.Keys.DOWN)) position.y -= SPEED;
-            if (InputHelper.isKeyPressed(Input.Keys.LEFT)) position.x -= SPEED;
-            else if (InputHelper.isKeyPressed(Input.Keys.RIGHT)) position.x += SPEED;
+            if (InputHelper.isKeyPressed(Input.Keys.UP, Input.Keys.W)) position.y += SPEED;
+            else if (InputHelper.isKeyPressed(Input.Keys.DOWN, Input.Keys.S)) position.y -= SPEED;
+            if (InputHelper.isKeyPressed(Input.Keys.LEFT, Input.Keys.A)) position.x -= SPEED;
+            else if (InputHelper.isKeyPressed(Input.Keys.RIGHT, Input.Keys.D)) position.x += SPEED;
 
             if (InputHelper.isKeyJustPressed(Input.Keys.SPACE)){
                 gob.addComponent(new TimerComponent(gob, 1, obj -> {

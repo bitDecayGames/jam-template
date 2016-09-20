@@ -9,6 +9,7 @@ import com.bitdecay.game.gameobject.MyGameObject;
 import com.bitdecay.game.room.AbstractRoom;
 import com.bitdecay.game.screen.GameScreen;
 import com.bitdecay.game.system.CameraUpdateSystem;
+import com.bitdecay.game.system.DrawSystem;
 import com.bitdecay.game.system.ShapeDrawSystem;
 import com.bitdecay.game.system.TimerSystem;
 import com.bitdecay.jump.level.Level;
@@ -26,6 +27,7 @@ public class DemoRoom extends AbstractRoom {
         new DemoMovementSystem(this);
         new TimerSystem(this);
         new CameraUpdateSystem(this);
+        new DrawSystem(this);
 
         // game objects should be added last
         gobs.add(demoControllableObject(0, 0));

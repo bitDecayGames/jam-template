@@ -7,7 +7,7 @@ import com.bitdecay.game.room.AbstractRoom;
 /**
  * This system is in charge of updating the timer components and calling their functions when the timer runs out.
  */
-public class TimerSystem extends AbstractForEachGobSystem {
+public class TimerSystem extends AbstractForEachUpdatableSystem {
     public TimerSystem(AbstractRoom room) {
         super(room);
     }

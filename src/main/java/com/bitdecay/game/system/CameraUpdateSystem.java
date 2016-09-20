@@ -8,7 +8,7 @@ import com.bitdecay.game.room.AbstractRoom;
 /**
  * This system is in charge of updating the camera with the list of points to follow each step.
  */
-public class CameraUpdateSystem extends AbstractForEachGobSystem {
+public class CameraUpdateSystem extends AbstractForEachUpdatableSystem {
     public CameraUpdateSystem(AbstractRoom room) {
         super(room);
     }

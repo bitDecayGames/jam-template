@@ -1,9 +1,12 @@
 package com.bitdecay.game.system;
 
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bitdecay.game.gameobject.MyGameObject;
 import com.bitdecay.game.trait.ICleanup;
-import com.bitdecay.game.trait.IProcessable;
+import com.bitdecay.game.trait.IDrawWithCamera;
 import com.bitdecay.game.trait.IRefreshable;
+import com.bitdecay.game.trait.IUpdate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +15,7 @@ import java.util.Optional;
 /**
  * The system manager is more of a helper class than anything.  It just facilitates all of the systems being "processed" and "refreshed".  As long as you add the system to the room, it will get added to the SystemManager.
  */
-public class SystemManager implements ICleanup, IRefreshable, IProcessable {
+public class SystemManager implements ICleanup, IRefreshable, IUpdate, IDrawWithCamera {
 
     private boolean dirty = false;
     private final List<AbstractSystem> systems = new ArrayList<>();
@@ -58,7 +61,17 @@ public class SystemManager implements ICleanup, IRefreshable, IProcessable {
     }
 
     @Override
-    public void process(float delta) {
-        systems.forEach(sys -> sys.process(delta));
+    public void update(float delta) {
+        systems.forEach(sys -> {
+            if (sys instanceof IUpdate) ((IUpdate) sys).update(delta);
+        });
+
+    }
+
+    @Override
+    public void draw(SpriteBatch spriteBatch, OrthographicCamera camera) {
+        systems.forEach(sys -> {
+            if (sys instanceof IDrawWithCamera) ((IDrawWithCamera) sys).draw(spriteBatch, camera);
+        });
     }
 }

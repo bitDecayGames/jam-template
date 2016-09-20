@@ -12,6 +12,7 @@ import com.bitdecay.game.trait.ICanSetRoom;
 import com.bitdecay.game.trait.ICanSetScreen;
 import com.bitdecay.game.trait.IHasScreenSize;
 import com.bitdecay.game.util.SoundLibrary;
+import com.bitdecay.game.util.Tilesets;
 import com.bitdecay.jump.collision.BitWorld;
 import com.bitdecay.jump.gdx.level.EditorIdentifierObject;
 import com.bitdecay.jump.gdx.level.RenderableLevelObject;
@@ -19,6 +20,8 @@ import com.bitdecay.jump.level.Level;
 import com.bitdecay.jump.leveleditor.EditorHook;
 import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -98,12 +101,12 @@ public class GameScreen implements Screen, EditorHook, IHasScreenSize, ICanSetSc
 
     @Override
     public void update(float delta) {
-        // TODO: do I actually need to do anything here?
+        if (room != null) room.update(delta);
     }
 
     @Override
     public void render(OrthographicCamera orthographicCamera) {
-        // TODO: do I actually need to do anything here?
+        if (room != null) room.render(orthographicCamera);
     }
 
     @Override
@@ -114,18 +117,16 @@ public class GameScreen implements Screen, EditorHook, IHasScreenSize, ICanSetSc
 
     @Override
     public List<EditorIdentifierObject> getTilesets() {
-        return null; // TODO: not sure where to get these yet
-    }
-
-    @Override
-    public List<EditorIdentifierObject> getThemes() {
-        return null; // TODO: not sure where to get these yet
+        return Tilesets.editorTilesets();
     }
 
     @Override
     public List<RenderableLevelObject> getCustomObjects() {
-        return null; // TODO: not sure where to get these yet
+        return Arrays.asList();
     }
+
+    @Override
+    public List<EditorIdentifierObject> getThemes() { return Collections.emptyList(); }
 
     @Override
     public void levelChanged(Level level) {

@@ -8,6 +8,8 @@ import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.game.Launcher;
 import com.bitdecay.game.MyGame;
 import com.bitdecay.game.camera.FollowOrthoCamera;
+import com.bitdecay.game.component.TileComponent;
+import com.bitdecay.game.gameobject.MyGameObjectFactory;
 import com.bitdecay.game.gameobject.MyGameObjects;
 import com.bitdecay.game.screen.GameScreen;
 import com.bitdecay.game.system.SystemManager;
@@ -17,6 +19,7 @@ import com.bitdecay.jump.collision.BitWorld;
 import com.bitdecay.jump.gdx.level.EditorIdentifierObject;
 import com.bitdecay.jump.gdx.level.RenderableLevelObject;
 import com.bitdecay.jump.level.Level;
+import com.bitdecay.jump.level.TileObject;
 import com.bitdecay.jump.leveleditor.EditorHook;
 import com.bitdecay.jump.leveleditor.render.LibGDXWorldRenderer;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -40,6 +43,7 @@ public abstract class AbstractRoom implements IUpdate, IDraw, IHasScreenSize, IC
 
     protected final LibGDXWorldRenderer worldRenderer = new LibGDXWorldRenderer();
     protected final BitWorld world = new BitWorld();
+    protected Level level;
 
     public AbstractRoom(GameScreen gameScreen, Level level){
         this.gameScreen = gameScreen;
@@ -68,12 +72,12 @@ public abstract class AbstractRoom implements IUpdate, IDraw, IHasScreenSize, IC
         camera.update(delta);
         world.step(delta);
 
-        systemManager.process(delta);
+        systemManager.update(delta);
     }
 
     @Override
     public void draw(SpriteBatch spriteBatch) {
-        if (MyGame.RUN_MODE == RunMode.DEV) worldRenderer.render(world, camera);
+        render(camera);
     }
 
     @Override
@@ -96,8 +100,10 @@ public abstract class AbstractRoom implements IUpdate, IDraw, IHasScreenSize, IC
     // /////////////////////////////////////
 
     @Override
-    public void render(OrthographicCamera orthographicCamera) {
-        throw new NotImplementedException();
+    public void render(OrthographicCamera cam) {
+        if (MyGame.RUN_MODE == RunMode.DEV) worldRenderer.render(world, cam);
+        systemManager.draw(spriteBatch, cam);
+
     }
 
     @Override
@@ -124,6 +130,20 @@ public abstract class AbstractRoom implements IUpdate, IDraw, IHasScreenSize, IC
     public final void levelChanged(Level level) {
         world.removeAllBodies();
         world.setLevel(level);
+        this.level = level;
+
+        // generate game objects from level tile objects
+        gobs.forEach(gob -> {
+            if (gob.hasComponent(TileComponent.class)) gobs.remove(gob);
+        });
+        gobs.cleanup();
+        for (int x = 0; x < level.gridObjects.length; x++) {
+            for (int y = 0; y < level.gridObjects[0].length; y++) {
+                TileObject obj = level.gridObjects[x][y];
+                if (obj != null) gobs.add(MyGameObjectFactory.tile(obj));
+            }
+        }
+        gobs.cleanup();
     }
 
 }

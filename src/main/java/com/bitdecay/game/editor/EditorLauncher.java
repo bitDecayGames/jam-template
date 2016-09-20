@@ -1,8 +1,10 @@
-package com.bitdecay.game;
+package com.bitdecay.game.editor;
 
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+import com.bitdecay.game.Launcher;
+import com.bitdecay.game.util.TexturePackerUtils;
 import com.bitdecay.jump.leveleditor.render.LevelEditor;
 
 /**
@@ -16,6 +18,8 @@ public class EditorLauncher {
         config.height = Launcher.conf.getInt("resolution.default.height");
         config.title = Launcher.conf.getString("title");
         config.fullscreen = false;
+
+        TexturePackerUtils.pack();
 
         LevelEditor.setAssetsFolder("../jump/jump-leveleditor/assets");
         new LwjglApplication(new EditorApp(), config);

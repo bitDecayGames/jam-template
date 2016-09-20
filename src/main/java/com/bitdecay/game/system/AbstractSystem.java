@@ -2,7 +2,6 @@ package com.bitdecay.game.system;
 
 import com.bitdecay.game.gameobject.MyGameObject;
 import com.bitdecay.game.room.AbstractRoom;
-import com.bitdecay.game.trait.IProcessable;
 import com.bitdecay.game.trait.IRefreshable;
 
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import java.util.stream.Collectors;
 /**
  * The System objects are where most of the game logic lives in an Entity Component System implementation.  If you find that you are writing an update method inside one of the components, then you are probably doing it wrong.  Components should just be keeping track of state.  While systems actually do something with that state.  For this abstract system, the goal was to take care of all of the boilerplate code.  Each system has it's own list of gobs.  The reason for this is because of all the game objects, each system only cares about the few that meet the criteria.  The validateGob method analyzes each game object and decides whether or not it should be a part of the internal list of game objects.  The refresh method is where the validateGob method is used.  Refresh gets called when ever there is a change to any of the game objects.  That includes adding or removing a game object, or adding or removing a component from a game object.
  */
-public abstract class AbstractSystem implements IRefreshable, IProcessable {
+public abstract class AbstractSystem implements IRefreshable {
 
     protected final AbstractRoom room;
     protected final List<MyGameObject> gobs = new ArrayList<>();
@@ -28,8 +27,6 @@ public abstract class AbstractSystem implements IRefreshable, IProcessable {
     }
 
     protected abstract boolean validateGob(MyGameObject gob);
-
-    public abstract void process(float delta);
 
     @Override
     public String toString(){
