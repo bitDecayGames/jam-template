@@ -11,6 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Static access to the tilesets defined within the application.conf file
+ */
 public final class Tilesets {
     private Tilesets(){}
 

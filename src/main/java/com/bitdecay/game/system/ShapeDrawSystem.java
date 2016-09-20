@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bitdecay.game.component.PositionComponent;
 import com.bitdecay.game.gameobject.MyGameObject;
 import com.bitdecay.game.room.AbstractRoom;
+import com.bitdecay.game.system.abstracted.AbstractDrawableSystem;
 import com.bitdecay.game.trait.IShapeDraw;
 
 /**

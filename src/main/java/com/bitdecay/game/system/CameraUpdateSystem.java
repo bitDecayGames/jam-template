@@ -4,6 +4,7 @@ import com.bitdecay.game.component.CameraFollowComponent;
 import com.bitdecay.game.component.PositionComponent;
 import com.bitdecay.game.gameobject.MyGameObject;
 import com.bitdecay.game.room.AbstractRoom;
+import com.bitdecay.game.system.abstracted.AbstractForEachUpdatableSystem;
 
 /**
  * This system is in charge of updating the camera with the list of points to follow each step.

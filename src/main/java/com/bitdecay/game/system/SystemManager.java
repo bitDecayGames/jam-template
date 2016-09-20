@@ -3,6 +3,7 @@ package com.bitdecay.game.system;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.bitdecay.game.gameobject.MyGameObject;
+import com.bitdecay.game.system.abstracted.AbstractSystem;
 import com.bitdecay.game.trait.ICleanup;
 import com.bitdecay.game.trait.IDrawWithCamera;
 import com.bitdecay.game.trait.IRefreshable;

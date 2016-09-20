@@ -4,6 +4,9 @@ import com.bytebreakstudios.animagic.texture.AnimagicTexturePacker;
 
 import java.io.File;
 
+/**
+ * Decides whether or not to pack textures based on the lastModified date of folder and files within the resources/img/packable folder
+ */
 public class TexturePackerUtils {
 
     private TexturePackerUtils(){}

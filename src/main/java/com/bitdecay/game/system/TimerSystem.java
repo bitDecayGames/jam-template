@@ -3,6 +3,7 @@ package com.bitdecay.game.system;
 import com.bitdecay.game.component.TimerComponent;
 import com.bitdecay.game.gameobject.MyGameObject;
 import com.bitdecay.game.room.AbstractRoom;
+import com.bitdecay.game.system.abstracted.AbstractForEachUpdatableSystem;
 
 /**
  * This system is in charge of updating the timer components and calling their functions when the timer runs out.

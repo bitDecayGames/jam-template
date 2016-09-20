@@ -5,7 +5,7 @@ import com.bitdecay.game.component.PositionComponent;
 import com.bitdecay.game.component.TimerComponent;
 import com.bitdecay.game.gameobject.MyGameObject;
 import com.bitdecay.game.room.AbstractRoom;
-import com.bitdecay.game.system.AbstractForEachUpdatableSystem;
+import com.bitdecay.game.system.abstracted.AbstractForEachUpdatableSystem;
 import com.bitdecay.game.util.InputHelper;
 
 /**

@@ -1,4 +1,4 @@
-package com.bitdecay.game.system;
+package com.bitdecay.game.system.abstracted;
 
 import com.bitdecay.game.room.AbstractRoom;
 import com.bitdecay.game.trait.IDrawWithCamera;
