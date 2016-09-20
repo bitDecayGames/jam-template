@@ -5,6 +5,9 @@ import com.bitdecay.game.screen.GameScreen;
 import com.bitdecay.game.util.RunMode;
 import com.bitdecay.jump.leveleditor.render.LevelEditor;
 
+/**
+ * This is used in the editor
+ */
 public class EditorApp extends Game {
 
     @Override

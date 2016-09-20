@@ -24,6 +24,9 @@ import com.bitdecay.game.util.SoundLibrary;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is the menu screen.  It should be fairly easy to add new options by using the previous options as templates.  A lot of the parts of the menu are constructed using the conf values in the /resources/conf/application.conf file.  If you make any changes, consider making them such that you can use the conf files to change them in the future.
+ */
 public class MainMenuScreen implements Screen {
 
     private MyGame game;
@@ -41,7 +44,7 @@ public class MainMenuScreen implements Screen {
 
         menuSelection = 0;
 
-        skin = new Skin(Gdx.files.classpath("skin/skin.json"));
+        skin = new Skin(Gdx.files.classpath(Launcher.conf.getString("menu.skin")));
 
         background = new Image(new Texture(Gdx.files.classpath(Launcher.conf.getString("menu.titleBackground"))));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

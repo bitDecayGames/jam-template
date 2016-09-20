@@ -24,6 +24,9 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * The room object is an added layer to the GameScreen class.  Instead of having all of the game logic reside in the GameScreen, it now will reside in the AbstractRoom and the individual room implementations.  Think of it like: you have one room for each level in the game and one room for each boss fight in the game.  The abstract room takes care of all the updating and drawing of everything.  However, if you have special requirements, you can always override the update or draw methods.  Just make sure to call super.update() somewhere in your override.  Several configuration values are set at the top of this class using the conf files in resources/conf.  Each room is separate of every other room so you need to go through the initialization each time you create a new room.  The reason for this is to limit cross talk.  We don't want bugs that span multiple rooms...  That would make it very difficult to debug.
+ */
 public abstract class AbstractRoom implements IUpdate, IDraw, IHasScreenSize, ICanSetScreen, EditorHook, IDisposable {
 
     protected final GameScreen gameScreen;

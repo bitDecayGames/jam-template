@@ -2,6 +2,9 @@ package com.bitdecay.game.component;
 
 import com.bitdecay.game.gameobject.MyGameObject;
 
+/**
+ * Currently this is not used for anything.
+ */
 public class SizeComponent extends AbstractComponent {
     public float w = 0;
     public float h = 0;

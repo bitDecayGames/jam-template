@@ -5,6 +5,9 @@ import com.bitdecay.game.gameobject.MyGameObject;
 import com.bitdecay.game.room.AbstractRoom;
 import com.bitdecay.game.trait.IShapeDraw;
 
+/**
+ * This system is in charge of providing a position to the IShapeDrawComponents so that they are able to correctly draw themselves.
+ */
 public class ShapeDrawSystem extends AbstractSystem {
     public ShapeDrawSystem(AbstractRoom room) {
         super(room);

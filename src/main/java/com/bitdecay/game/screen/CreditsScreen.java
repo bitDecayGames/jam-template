@@ -16,6 +16,9 @@ import com.bitdecay.game.Launcher;
 import com.bitdecay.game.MyGame;
 import com.bitdecay.game.util.InputHelper;
 
+/**
+ * This is the generic credits screen.  Almost everything in the credits is populated from the /resources/conf/credits.conf file.  The only reason you should be making changes to this file is to adjust the position or speed of the text.
+ */
 public class CreditsScreen implements Screen {
 
     private static String SPACE_AFTER_TITLE = "\n\n\n";
@@ -46,7 +49,7 @@ public class CreditsScreen implements Screen {
         upIsPressed = false;
         escWasPressed = false;
 
-        Skin skin = new Skin(Gdx.files.classpath("skin/skin.json"));
+        Skin skin = new Skin(Gdx.files.classpath(Launcher.conf.getString("credits.skin")));
 
         background = new Image(new Texture(Gdx.files.classpath(Launcher.conf.getString("credits.background"))));
         background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());

@@ -9,6 +9,9 @@ import com.typesafe.config.ConfigFactory;
 
 import java.io.File;
 
+/**
+ * The launcher now reads the program args as well as the lastModified files to determine whether or not to run the texture packer.
+ */
 public class Launcher {
 
     public static Config conf = ConfigFactory.load("conf/application.conf");

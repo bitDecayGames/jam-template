@@ -2,6 +2,9 @@ package com.bitdecay.game.util;
 
 import com.badlogic.gdx.Gdx;
 
+/**
+ * Helps to allow for multi-key checks on JustPressed and Pressed.
+ */
 public final class InputHelper {
     private InputHelper(){}
 

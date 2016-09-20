@@ -8,6 +8,9 @@ import com.bitdecay.game.room.AbstractRoom;
 import com.bitdecay.game.system.AbstractForEachGobSystem;
 import com.bitdecay.game.util.InputHelper;
 
+/**
+ * This is how a system SHOULD look.  All of the game logic is contained within the system.
+ */
 public class DemoMovementSystem extends AbstractForEachGobSystem {
 
     private float SPEED = 4;

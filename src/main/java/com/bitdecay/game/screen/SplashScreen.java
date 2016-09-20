@@ -19,6 +19,9 @@ import com.bitdecay.game.util.SoundLibrary;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The splash screen is simple.  It parses a list of wallpapers from the conf file and then displays them in order with fade-ins and outs.  And when there are no more wallpapers, it switches to the next screen.  The only reason you should make changes to this file are to maybe change the text about skipping, or change the next screen that is set.
+ */
 public class SplashScreen implements Screen {
 
     private List<Runnable> runnables = new ArrayList<>();

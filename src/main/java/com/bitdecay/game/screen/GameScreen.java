@@ -21,6 +21,9 @@ import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 
 import java.util.List;
 
+/**
+ * The game screen used to be the main source of game logic.  It is now more just like any other screen.  It allows for the game to switch to it, but the main logic is moved into the Room class.  In the same way you can switch from screen to screen with a reference to the MyGame object, you can switch from room to room with the GameScreen object.
+ */
 public class GameScreen implements Screen, EditorHook, IHasScreenSize, ICanSetScreen, ICanSetRoom {
 
     private MyGame game;

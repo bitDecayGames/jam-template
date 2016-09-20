@@ -10,6 +10,9 @@ import com.bitdecay.game.util.RunMode;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlas;
 import com.bytebreakstudios.animagic.texture.AnimagicTextureAtlasLoader;
 
+/**
+ * The actual game object used by libgdx.
+ */
 public class MyGame extends Game implements ICanSetScreen{
     // statics
     public static AssetManager ASSET_MANAGER = new AssetManager();

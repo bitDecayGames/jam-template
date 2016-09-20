@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * The system manager is more of a helper class than anything.  It just facilitates all of the systems being "processed" and "refreshed".  As long as you add the system to the room, it will get added to the SystemManager.
+ */
 public class SystemManager implements ICleanup, IRefreshable, IProcessable {
 
     private boolean dirty = false;

@@ -11,6 +11,9 @@ import com.typesafe.config.ConfigObject;
 import java.io.File;
 import java.util.HashMap;
 
+/**
+ * SoundLibrary is now fully built and configured based on the location of files and the sounds.conf file.  Look at the /resources/conf/sounds.conf file to figure out how to change the volume for each individual sound effect and music.  If you don't enter a value into sounds.conf, a default value will be used.
+ */
 public class SoundLibrary {
     private static final HashMap<String, SoundEffect> sounds = new HashMap<>();
     private static final HashMap<String, MusicEffect> musics = new HashMap<>();
@@ -19,7 +22,7 @@ public class SoundLibrary {
         // ///////////////////////////
         // Sound Effects
         // ///////////////////////////
-        File fxDir = new File("src/main/resources/sound/fx");
+        File fxDir = new File(Launcher.conf.getString("sounds.fxDir"));
         float defaultFxVolume = new Double(Launcher.conf.getDouble("sounds.defaultFxVolume")).floatValue();
         // add all the fx files with a default volume
         if (fxDir.isDirectory() && fxDir.exists()) for (File fxFile : fxDir.listFiles()) {
@@ -44,7 +47,7 @@ public class SoundLibrary {
         // ///////////////////////////
         // Music
         // ///////////////////////////
-        File musicDir = new File("src/main/resources/sound/music");
+        File musicDir = new File(Launcher.conf.getString("sounds.musicDir"));
         float defaultMusicVolume = new Double(Launcher.conf.getDouble("sounds.defaultMusicVolume")).floatValue();
         // add all the music files with a default volume
         if (musicDir.isDirectory() && musicDir.exists()) for (File musicFile : musicDir.listFiles()) {
