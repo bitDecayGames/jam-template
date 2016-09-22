@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.game.Launcher;
 import com.bitdecay.game.MyGame;
 import com.bitdecay.game.camera.FollowOrthoCamera;
+import com.bitdecay.game.component.PhysicsComponent;
 import com.bitdecay.game.component.TileComponent;
 import com.bitdecay.game.gameobject.MyGameObjectFactory;
 import com.bitdecay.game.gameobject.MyGameObjects;
@@ -132,11 +133,14 @@ public abstract class AbstractRoom implements IUpdate, IDraw, IHasScreenSize, IC
         world.setLevel(level);
         this.level = level;
 
-        // generate game objects from level tile objects
         gobs.forEach(gob -> {
+            // remove all tile component gobs
             if (gob.hasComponent(TileComponent.class)) gobs.remove(gob);
+            // add the bodies back in
+            else if (gob.hasComponent(PhysicsComponent.class)) gob.forEach(PhysicsComponent.class, phy -> world.addBody(phy.body()));
         });
         gobs.cleanup();
+        // generate game objects from level tile objects
         for (int x = 0; x < level.gridObjects.length; x++) {
             for (int y = 0; y < level.gridObjects[0].length; y++) {
                 TileObject obj = level.gridObjects[x][y];

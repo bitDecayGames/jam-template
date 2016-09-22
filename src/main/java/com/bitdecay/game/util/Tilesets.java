@@ -54,6 +54,7 @@ public final class Tilesets {
     }
 
     public static Tileset tilesetForMaterial(int material){
+        initTilesets();
         return tilesets.stream().filter(t -> t.material == material).findFirst().get();
     }
 
