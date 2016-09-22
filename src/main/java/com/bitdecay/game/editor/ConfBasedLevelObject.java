@@ -21,15 +21,12 @@ public class ConfBasedLevelObject extends RenderableLevelObject {
     private final MyGameObject obj;
 
     public ConfBasedLevelObject(){
-        this.name = "default";
-        this.obj = null;
-        this.rect = new BitRectangle(0, 0, 20, 20);
+        throw new RuntimeException("If this constructor gets called, then there is no way to figure out what game object this level object refers to.");
     }
 
     @JsonCreator
     public ConfBasedLevelObject(@JsonProperty("name") String name){
         super();
-        System.out.println("Called with name property: " + name);
         this.name = name;
         this.rect = new BitRectangle(0, 0, 20, 20);
 
@@ -40,11 +37,6 @@ public class ConfBasedLevelObject extends RenderableLevelObject {
             rect.width = size.w;
             rect.height = size.h;
         });
-    }
-
-    @Override
-    public RenderableLevelObject newInstance() {
-        return new ConfBasedLevelObject(name);
     }
 
     @Override
