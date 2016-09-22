@@ -3,7 +3,7 @@ package com.bitdecay.game.gameobject;
 import com.bitdecay.game.component.PositionComponent;
 import com.bitdecay.game.component.SizeComponent;
 import com.bitdecay.game.component.TileComponent;
-import com.bitdecay.game.editor.LevelObjectFromConf;
+import com.bitdecay.game.editor.ConfBasedLevelObject;
 import com.bitdecay.game.room.AbstractRoom;
 import com.bitdecay.game.util.Tilesets;
 import com.bitdecay.jump.gdx.level.RenderableLevelObject;
@@ -24,7 +24,9 @@ public final class MyGameObjectFactory {
     }
 
     public static List<RenderableLevelObject> allLevelObjects(){
-        return MyGameObjectFromConf.objectConfs().stream().map(config -> new LevelObjectFromConf(config)).map(obj -> RenderableLevelObject.class.cast(obj)).collect(Collectors.toList());
+//        return MyGameObjectFromConf.objectConfs().stream().map(config -> new LevelObjectFromConf(config)).map(obj -> RenderableLevelObject.class.cast(obj)).collect(Collectors.toList());
+
+        return MyGameObjectFromConf.objectConfs().stream().map(config -> new ConfBasedLevelObject(config.getString("name"))).map(obj -> RenderableLevelObject.class.cast(obj)).collect(Collectors.toList());
     }
 
     public static MyGameObject tile(TileObject tile){

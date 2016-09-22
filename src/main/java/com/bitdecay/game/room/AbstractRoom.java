@@ -141,12 +141,14 @@ public abstract class AbstractRoom implements IUpdate, IDraw, IHasScreenSize, IC
         });
         gobs.cleanup();
         // generate game objects from level tile objects
-        for (int x = 0; x < level.gridObjects.length; x++) {
-            for (int y = 0; y < level.gridObjects[0].length; y++) {
-                TileObject obj = level.gridObjects[x][y];
-                if (obj != null) gobs.add(MyGameObjectFactory.tile(obj));
+        level.layers.layers.forEach((index, layer)->{
+            for (int x = 0; x < layer.grid.length; x++) {
+                for (int y = 0; y < layer.grid[0].length; y++) {
+                    TileObject obj = layer.grid[x][y];
+                    if (obj != null) gobs.add(MyGameObjectFactory.tile(obj));
+                }
             }
-        }
+        });
         gobs.cleanup();
     }
 

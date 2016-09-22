@@ -2,31 +2,49 @@ package com.bitdecay.game.editor;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.bitdecay.game.component.IconComponent;
-import com.bitdecay.game.component.NameComponent;
 import com.bitdecay.game.component.SizeComponent;
 import com.bitdecay.game.gameobject.MyGameObject;
+import com.bitdecay.game.gameobject.MyGameObjectFactory;
 import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.annotation.CantInspect;
 import com.bitdecay.jump.gdx.level.RenderableLevelObject;
 import com.bitdecay.jump.geom.BitRectangle;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class LevelObjectFromMyGameObject extends RenderableLevelObject {
+public class ConfBasedLevelObject extends RenderableLevelObject {
 
     @CantInspect
-    final public String name;
+    private final String name;
 
-    public MyGameObject obj;
+    @CantInspect
+    private final MyGameObject obj;
 
-    public LevelObjectFromMyGameObject(MyGameObject obj){
+    public ConfBasedLevelObject(){
+        this.name = "default";
+        this.obj = null;
+        this.rect = new BitRectangle(0, 0, 20, 20);
+    }
+
+    @JsonCreator
+    public ConfBasedLevelObject(@JsonProperty("name") String name){
         super();
-        this.obj = obj;
+        System.out.println("Called with name property: " + name);
+        this.name = name;
+        this.rect = new BitRectangle(0, 0, 20, 20);
 
-        this.name = obj.getComponent(NameComponent.class).map(Object::toString).orElseGet(null);
+        obj = MyGameObjectFactory.objectFromConf(null, name, 0, 0);
+
         rect = new BitRectangle(0, 0, 16, 16); // default values in case there is no size
         obj.getComponent(SizeComponent.class).ifPresent(size -> {
             rect.width = size.w;
             rect.height = size.h;
         });
+    }
+
+    @Override
+    public RenderableLevelObject newInstance() {
+        return new ConfBasedLevelObject(name);
     }
 
     @Override
