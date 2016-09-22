@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.game.Launcher;
 import com.bitdecay.game.MyGame;
 import com.bitdecay.game.demo.DemoRoom;
+import com.bitdecay.game.gameobject.MyGameObjectFactory;
 import com.bitdecay.game.trait.ICanSetRoom;
 import com.bitdecay.game.trait.ICanSetScreen;
 import com.bitdecay.game.trait.IHasScreenSize;
@@ -20,7 +21,6 @@ import com.bitdecay.jump.level.Level;
 import com.bitdecay.jump.leveleditor.EditorHook;
 import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -122,7 +122,7 @@ public class GameScreen implements Screen, EditorHook, IHasScreenSize, ICanSetSc
 
     @Override
     public List<RenderableLevelObject> getCustomObjects() {
-        return Arrays.asList();
+        return MyGameObjectFactory.allLevelObjects();
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.bitdecay.game.editor;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
-import com.bitdecay.game.component.DrawableComponent;
+import com.bitdecay.game.component.IconComponent;
 import com.bitdecay.game.component.NameComponent;
 import com.bitdecay.game.component.SizeComponent;
 import com.bitdecay.game.gameobject.MyGameObject;
@@ -31,7 +31,7 @@ public class LevelObjectFromMyGameObject extends RenderableLevelObject {
 
     @Override
     public TextureRegion texture() {
-        return obj.getComponent(DrawableComponent.class).map(DrawableComponent::image).orElseGet(null);
+        return obj.getComponent(IconComponent.class).map(IconComponent::icon).orElseGet(null);
     }
 
     @Override

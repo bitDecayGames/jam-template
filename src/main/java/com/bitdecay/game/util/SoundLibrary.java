@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.bitdecay.game.Launcher;
+import com.typesafe.config.Config;
 import com.typesafe.config.ConfigList;
 import com.typesafe.config.ConfigObject;
 
@@ -34,13 +35,9 @@ public class SoundLibrary {
         ConfigList fxs = Launcher.conf.getList("sounds.fx");
         fxs.forEach(configValue -> {
             if (configValue instanceof ConfigObject){
-                ConfigObject fx = (ConfigObject) configValue;
-                if (fx.containsKey("name") && fx.containsKey("volume")){
-                    String fxName = (String) fx.get("name").unwrapped();
-                    float fxVolume = new Double((double) fx.get("volume").unwrapped()).floatValue();
-                    SoundEffect fxObj = getSound(fxName);
-                    if (fxObj != null) fxObj.volume = fxVolume;
-                }
+                Config fx = ((ConfigObject) configValue).toConfig();
+                SoundEffect fxObj = getSound(fx.getString("name"));
+                if (fxObj != null) fxObj.volume = new Double(fx.getDouble("volume")).floatValue();
             }
         });
 
@@ -59,13 +56,9 @@ public class SoundLibrary {
         ConfigList musicsConf = Launcher.conf.getList("sounds.music");
         musicsConf.forEach(configValue -> {
             if (configValue instanceof ConfigObject){
-                ConfigObject music = (ConfigObject) configValue;
-                if (music.containsKey("name") && music.containsKey("volume")){
-                    String musicName = (String) music.get("name").unwrapped();
-                    float musicVolume = new Double((double) music.get("volume").unwrapped()).floatValue();
-                    MusicEffect musicObj = getMusic(musicName);
-                    if (musicObj != null) musicObj.volume = musicVolume;
-                }
+                Config music = ((ConfigObject) configValue).toConfig();
+                MusicEffect musicObj = getMusic(music.getString("name"));
+                if (musicObj != null) musicObj.volume = new Double(music.getDouble("volume")).floatValue();
             }
         });
     }

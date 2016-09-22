@@ -43,6 +43,8 @@ public class RespawnSystem extends AbstractForEachUpdatableSystem {
                     gob.forEach(PhysicsComponent.class, phy -> {
                         phy.body().aabb.xy.x = resPos.x;
                         phy.body().aabb.xy.y = resPos.y;
+                        // TODO: this SHOULD be setting the velocity to 0... but it isn't?
+                        phy.body().velocity.scale(0);
                     });
                 }
             });
