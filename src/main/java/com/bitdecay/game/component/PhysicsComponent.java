@@ -40,11 +40,11 @@ public class PhysicsComponent extends AbstractComponent {
 
     public PhysicsComponent(MyGameObject obj, Config conf) {
         this(obj,
-                new Double(conf.getDouble("width")).floatValue(),
-                new Double(conf.getDouble("height")).floatValue(),
+                (float) conf.getDouble("width"),
+                (float) conf.getDouble("height"),
                 conf.getInt("jumpStrength"),
                 conf.getInt("jumpCount"),
-                new Double(conf.getDouble("jumpVariableHeightWindow")).floatValue(),
+                (float) conf.getDouble("jumpVariableHeightWindow"),
                 conf.getInt("deceleration"),
                 conf.getInt("acceleration"),
                 conf.getInt("airAcceleration"),

@@ -24,7 +24,7 @@ public class SoundLibrary {
         // Sound Effects
         // ///////////////////////////
         File fxDir = new File(Launcher.conf.getString("sounds.fxDir"));
-        float defaultFxVolume = new Double(Launcher.conf.getDouble("sounds.defaultFxVolume")).floatValue();
+        float defaultFxVolume = (float) Launcher.conf.getDouble("sounds.defaultFxVolume");
         // add all the fx files with a default volume
         if (fxDir.isDirectory() && fxDir.exists()) for (File fxFile : fxDir.listFiles()) {
             if (fxFile != null && fxFile.exists()){
@@ -37,7 +37,7 @@ public class SoundLibrary {
             if (configValue instanceof ConfigObject){
                 Config fx = ((ConfigObject) configValue).toConfig();
                 SoundEffect fxObj = getSound(fx.getString("name"));
-                if (fxObj != null) fxObj.volume = new Double(fx.getDouble("volume")).floatValue();
+                if (fxObj != null) fxObj.volume = (float) fx.getDouble("volume");
             }
         });
 
@@ -45,7 +45,7 @@ public class SoundLibrary {
         // Music
         // ///////////////////////////
         File musicDir = new File(Launcher.conf.getString("sounds.musicDir"));
-        float defaultMusicVolume = new Double(Launcher.conf.getDouble("sounds.defaultMusicVolume")).floatValue();
+        float defaultMusicVolume = (float) Launcher.conf.getDouble("sounds.defaultMusicVolume");
         // add all the music files with a default volume
         if (musicDir.isDirectory() && musicDir.exists()) for (File musicFile : musicDir.listFiles()) {
             if (musicFile != null && musicFile.exists()){
@@ -58,7 +58,7 @@ public class SoundLibrary {
             if (configValue instanceof ConfigObject){
                 Config music = ((ConfigObject) configValue).toConfig();
                 MusicEffect musicObj = getMusic(music.getString("name"));
-                if (musicObj != null) musicObj.volume = new Double(music.getDouble("volume")).floatValue();
+                if (musicObj != null) musicObj.volume = (float) music.getDouble("volume");
             }
         });
     }

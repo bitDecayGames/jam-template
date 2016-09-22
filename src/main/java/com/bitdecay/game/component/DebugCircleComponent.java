@@ -22,13 +22,13 @@ public class DebugCircleComponent extends AbstractComponent implements IShapeDra
 
     public DebugCircleComponent(MyGameObject obj, Config conf) {
         super(obj, conf);
-        this.radius = new Double(conf.getDouble("radius")).floatValue();
+        this.radius = (float) conf.getDouble("radius");
         Config colorConf = conf.getConfig("color");
         this.color = new Color(
-                new Double(colorConf.getDouble("r")).floatValue(),
-                new Double(colorConf.getDouble("g")).floatValue(),
-                new Double(colorConf.getDouble("b")).floatValue(),
-                new Double(colorConf.getDouble("a")).floatValue()
+                (float) colorConf.getDouble("r"),
+                (float) colorConf.getDouble("g"),
+                (float) colorConf.getDouble("b"),
+                (float) colorConf.getDouble("a")
         );
     }
 
