@@ -4,6 +4,9 @@ import com.bitdecay.jump.gdx.input.KeyState;
 
 import java.util.List;
 
+/**
+ * For use with jump controls
+ */
 public class MultiKeyState extends KeyState {
 
     private int[] keys;

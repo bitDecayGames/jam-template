@@ -12,6 +12,9 @@ import com.bitdecay.jump.geom.BitRectangle;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+/**
+ * This is a generic implementation of RenderableLevelObject.  It gets populated using the gobs.conf file.
+ */
 public class ConfBasedLevelObject extends RenderableLevelObject {
 
     @CantInspect

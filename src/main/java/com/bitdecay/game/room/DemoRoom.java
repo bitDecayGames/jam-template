@@ -1,8 +1,7 @@
-package com.bitdecay.game.demo;
+package com.bitdecay.game.room;
 
 
 import com.bitdecay.game.gameobject.MyGameObjectFactory;
-import com.bitdecay.game.room.AbstractRoom;
 import com.bitdecay.game.screen.GameScreen;
 import com.bitdecay.game.system.*;
 import com.bitdecay.jump.level.Level;
