@@ -8,8 +8,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.game.Launcher;
 import com.bitdecay.game.MyGame;
 import com.bitdecay.game.camera.FollowOrthoCamera;
-import com.bitdecay.game.component.PhysicsComponent;
-import com.bitdecay.game.component.TileComponent;
 import com.bitdecay.game.gameobject.MyGameObjectFactory;
 import com.bitdecay.game.gameobject.MyGameObjects;
 import com.bitdecay.game.screen.GameScreen;
@@ -133,14 +131,9 @@ public abstract class AbstractRoom implements IUpdate, IDraw, IHasScreenSize, IC
         world.setLevel(level);
         this.level = level;
 
-        gobs.forEach(gob -> {
-            // remove all tile component gobs
-            if (gob.hasComponent(TileComponent.class)) gobs.remove(gob);
-            // add the bodies back in
-            else if (gob.hasComponent(PhysicsComponent.class)) gob.forEach(PhysicsComponent.class, phy -> world.addBody(phy.body()));
-        });
+        gobs.clear();
         gobs.cleanup();
-        // generate game objects from level tile objects
+        // generate game objects from level tiles
         level.layers.layers.forEach((index, layer)->{
             for (int x = 0; x < layer.grid.length; x++) {
                 for (int y = 0; y < layer.grid[0].length; y++) {
@@ -149,6 +142,8 @@ public abstract class AbstractRoom implements IUpdate, IDraw, IHasScreenSize, IC
                 }
             }
         });
+        // generate game objects from renderable level objects
+        level.layers.layers.forEach((index, layer) -> layer.otherObjects.forEach((uuid, levelObject) -> gobs.add(MyGameObjectFactory.objectFromConf(levelObject.name(), levelObject.rect.xy.x, levelObject.rect.xy.y))));
         gobs.cleanup();
     }
 

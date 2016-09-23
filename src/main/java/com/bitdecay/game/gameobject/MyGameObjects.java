@@ -45,6 +45,11 @@ public class MyGameObjects implements ICleanup {
         return this;
     }
 
+    public MyGameObjects clear(){
+        gobsToRemove.addAll(gobs);
+        return this;
+    }
+
     @Override
     public boolean isDirty() {
         return gobs.stream().filter(MyGameObject::isDirty).findFirst().isPresent() || dirty;

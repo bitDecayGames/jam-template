@@ -32,7 +32,7 @@ public class ConfBasedLevelObject extends RenderableLevelObject {
         super();
         this.name = name;
 
-        obj = MyGameObjectFactory.objectFromConf(null, name, 0, 0);
+        obj = MyGameObjectFactory.objectFromConf(name, 0, 0);
 
         rect = new BitRectangle(0, 0, 16, 16); // default values in case there is no size
         obj.getComponent(SizeComponent.class).ifPresent(size -> {

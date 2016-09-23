@@ -1,6 +1,8 @@
 package com.bitdecay.game.component;
 
 import com.bitdecay.game.gameobject.MyGameObject;
+import com.bitdecay.game.room.AbstractRoom;
+import com.bitdecay.game.trait.IInitializable;
 import com.bitdecay.jump.BitBody;
 import com.bitdecay.jump.BodyType;
 import com.bitdecay.jump.JumperBody;
@@ -12,8 +14,9 @@ import com.typesafe.config.Config;
 /**
  * The component in charge of tracking the BitBody of the object
  */
-public class PhysicsComponent extends AbstractComponent {
+public class PhysicsComponent extends AbstractComponent implements IInitializable {
     private BitBody body;
+    private boolean initialized = false;
 
     public PhysicsComponent(MyGameObject obj, BitBody body){
         super(obj);
@@ -53,5 +56,16 @@ public class PhysicsComponent extends AbstractComponent {
 
     public BitBody body() {
         return body;
+    }
+
+    @Override
+    public boolean isInitialized() {
+        return initialized;
+    }
+
+    @Override
+    public void initialize(AbstractRoom room) {
+        room.getWorld().addBody(body);
+        initialized = true;
     }
 }

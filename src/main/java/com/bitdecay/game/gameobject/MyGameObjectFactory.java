@@ -4,7 +4,6 @@ import com.bitdecay.game.component.PositionComponent;
 import com.bitdecay.game.component.SizeComponent;
 import com.bitdecay.game.component.TileComponent;
 import com.bitdecay.game.editor.ConfBasedLevelObject;
-import com.bitdecay.game.room.AbstractRoom;
 import com.bitdecay.game.util.Tilesets;
 import com.bitdecay.jump.gdx.level.RenderableLevelObject;
 import com.bitdecay.jump.level.TileObject;
@@ -18,9 +17,9 @@ import java.util.stream.Collectors;
 public final class MyGameObjectFactory {
     private MyGameObjectFactory(){}
 
-    public static MyGameObject objectFromConf(AbstractRoom room, String name, float x, float y){
+    public static MyGameObject objectFromConf(String name, float x, float y){
         // hmmm this is basically just a wrapper... i'm not sure if this is the right way to do it
-        return MyGameObjectFromConf.objectFromConf(room, name, x, y);
+        return MyGameObjectFromConf.objectFromConf(name, x, y);
     }
 
     public static List<RenderableLevelObject> allLevelObjects(){

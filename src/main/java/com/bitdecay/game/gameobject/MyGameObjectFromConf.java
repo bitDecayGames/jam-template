@@ -1,9 +1,9 @@
 package com.bitdecay.game.gameobject;
 
 import com.bitdecay.game.Launcher;
-import com.bitdecay.game.component.*;
-import com.bitdecay.game.room.AbstractRoom;
-import com.bitdecay.jump.control.PlayerInputController;
+import com.bitdecay.game.component.IconComponent;
+import com.bitdecay.game.component.NameComponent;
+import com.bitdecay.game.component.PositionComponent;
 import com.typesafe.config.Config;
 
 import java.lang.reflect.Constructor;
@@ -31,7 +31,7 @@ public final class MyGameObjectFromConf {
         return list;
     }
 
-    public static MyGameObject objectFromConf(AbstractRoom room, String name, float x, float y){
+    public static MyGameObject objectFromConf(String name, float x, float y){
         Optional<Config> conf = configForObjectName(name);
         MyGameObject obj = new MyGameObject();
         new NameComponent(obj, name);
@@ -65,15 +65,6 @@ public final class MyGameObjectFromConf {
             }
         });
         obj.cleanup();
-        // //////////////////////////////
-        // special case components
-        if (room != null) {
-            obj.forEach(PhysicsComponent.class, phy -> {
-                room.getWorld().addBody(phy.body());
-                obj.forEach(KeyboardInputComponent.class, input -> phy.body().controller = new PlayerInputController(input));
-            });
-        }
-        // //////////////////////////////
         return obj;
     }
 
