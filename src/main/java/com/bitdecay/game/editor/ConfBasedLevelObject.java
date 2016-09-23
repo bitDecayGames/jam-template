@@ -31,7 +31,6 @@ public class ConfBasedLevelObject extends RenderableLevelObject {
     public ConfBasedLevelObject(@JsonProperty("name") String name){
         super();
         this.name = name;
-        this.rect = new BitRectangle(0, 0, 20, 20);
 
         obj = MyGameObjectFactory.objectFromConf(null, name, 0, 0);
 
@@ -40,6 +39,11 @@ public class ConfBasedLevelObject extends RenderableLevelObject {
             rect.width = size.w;
             rect.height = size.h;
         });
+    }
+
+    @Override
+    public RenderableLevelObject getNewCopy() throws Exception {
+        return new ConfBasedLevelObject(name);
     }
 
     @Override
