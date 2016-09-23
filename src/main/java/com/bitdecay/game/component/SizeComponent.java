@@ -14,7 +14,7 @@ public class SizeComponent extends AbstractComponent {
         this(obj, (float) conf.getDouble("w"), (float) conf.getDouble("h"));
     }
 
-    private SizeComponent(MyGameObject obj, float width, float height){
+    public SizeComponent(MyGameObject obj, float width, float height){
         super(obj);
         this.w = width;
         this.h = height;

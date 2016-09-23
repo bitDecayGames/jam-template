@@ -57,6 +57,10 @@ public abstract class AbstractRoom implements IUpdate, IDraw, IHasScreenSize, IC
         levelChanged(level);
     }
 
+    public MyGameObjects getGameObjects(){
+        return gobs;
+    }
+
     public void render(float delta){
         update(delta);
         draw(spriteBatch);
@@ -146,5 +150,4 @@ public abstract class AbstractRoom implements IUpdate, IDraw, IHasScreenSize, IC
         level.layers.layers.forEach((index, layer) -> layer.otherObjects.forEach((uuid, levelObject) -> gobs.add(MyGameObjectFactory.objectFromConf(levelObject.name(), levelObject.rect.xy.x, levelObject.rect.xy.y))));
         gobs.cleanup();
     }
-
 }

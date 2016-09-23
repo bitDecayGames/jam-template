@@ -50,6 +50,10 @@ public class MyGameObjects implements ICleanup {
         return this;
     }
 
+    public int size(){
+        return gobs.size();
+    }
+
     @Override
     public boolean isDirty() {
         return gobs.stream().filter(MyGameObject::isDirty).findFirst().isPresent() || dirty;
@@ -57,12 +61,12 @@ public class MyGameObjects implements ICleanup {
 
     @Override
     public void cleanup() {
+        dirty = false; // this goes at the beginning so that the next steps could actually make it dirty again
         gobsToRemove.forEach(gobs::remove);
         gobsToRemove.clear();
         gobsToAdd.forEach(gobs::add);
         gobsToAdd.clear();
         gobs.forEach(MyGameObject::cleanup);
-        dirty = false;
         refreshables.forEach(r -> r.refresh(gobs));
     }
 }
