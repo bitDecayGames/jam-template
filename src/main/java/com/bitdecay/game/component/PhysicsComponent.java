@@ -18,12 +18,12 @@ public class PhysicsComponent extends AbstractComponent implements IInitializabl
     private BitBody body;
     private boolean initialized = false;
 
-    public PhysicsComponent(MyGameObject obj, BitBody body){
+    private PhysicsComponent(MyGameObject obj, BitBody body){
         super(obj);
         this.body = body;
     }
 
-    public PhysicsComponent(MyGameObject obj, float width, float height, int jumpStrength, int jumpCount, float jumpVariableHeightWindow, int deceleration, int acceleration, int airAcceleration, boolean jumpHittingHeadStopsJump){
+    private PhysicsComponent(MyGameObject obj, float width, float height, int jumpStrength, int jumpCount, float jumpVariableHeightWindow, int deceleration, int acceleration, int airAcceleration, boolean jumpHittingHeadStopsJump){
         super(obj);
         JumperBody body = new JumperBody();
         body.props.deceleration = deceleration;
@@ -65,6 +65,9 @@ public class PhysicsComponent extends AbstractComponent implements IInitializabl
 
     @Override
     public void initialize(AbstractRoom room) {
+        obj.forEach(PositionComponent.class, pos -> {
+            body.aabb.xy.set(pos.x, pos.y);
+        });
         room.getWorld().addBody(body);
         initialized = true;
     }
