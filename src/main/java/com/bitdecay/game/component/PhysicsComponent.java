@@ -7,6 +7,7 @@ import com.bitdecay.jump.JumperBody;
 import com.bitdecay.jump.geom.BitRectangle;
 import com.bitdecay.jump.properties.JumperProperties;
 import com.bitdecay.jump.render.JumperRenderStateWatcher;
+import com.typesafe.config.Config;
 
 /**
  * The component in charge of tracking the BitBody of the object
@@ -35,6 +36,19 @@ public class PhysicsComponent extends AbstractComponent {
         body.renderStateWatcher = new JumperRenderStateWatcher();
         body.jumperProps.jumpHittingHeadStopsJump = jumpHittingHeadStopsJump;
         this.body = body;
+    }
+
+    public PhysicsComponent(MyGameObject obj, Config conf) {
+        this(obj,
+                (float) conf.getDouble("width"),
+                (float) conf.getDouble("height"),
+                conf.getInt("jumpStrength"),
+                conf.getInt("jumpCount"),
+                (float) conf.getDouble("jumpVariableHeightWindow"),
+                conf.getInt("deceleration"),
+                conf.getInt("acceleration"),
+                conf.getInt("airAcceleration"),
+                conf.getBoolean("jumpHittingHeadStopsJump"));
     }
 
     public BitBody body() {

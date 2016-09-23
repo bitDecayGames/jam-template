@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.bitdecay.game.Launcher;
+import com.typesafe.config.Config;
 import com.typesafe.config.ConfigList;
 import com.typesafe.config.ConfigObject;
 
@@ -23,7 +24,7 @@ public class SoundLibrary {
         // Sound Effects
         // ///////////////////////////
         File fxDir = new File(Launcher.conf.getString("sounds.fxDir"));
-        float defaultFxVolume = new Double(Launcher.conf.getDouble("sounds.defaultFxVolume")).floatValue();
+        float defaultFxVolume = (float) Launcher.conf.getDouble("sounds.defaultFxVolume");
         // add all the fx files with a default volume
         if (fxDir.isDirectory() && fxDir.exists()) for (File fxFile : fxDir.listFiles()) {
             if (fxFile != null && fxFile.exists()){
@@ -34,13 +35,9 @@ public class SoundLibrary {
         ConfigList fxs = Launcher.conf.getList("sounds.fx");
         fxs.forEach(configValue -> {
             if (configValue instanceof ConfigObject){
-                ConfigObject fx = (ConfigObject) configValue;
-                if (fx.containsKey("name") && fx.containsKey("volume")){
-                    String fxName = (String) fx.get("name").unwrapped();
-                    float fxVolume = new Double((double) fx.get("volume").unwrapped()).floatValue();
-                    SoundEffect fxObj = getSound(fxName);
-                    if (fxObj != null) fxObj.volume = fxVolume;
-                }
+                Config fx = ((ConfigObject) configValue).toConfig();
+                SoundEffect fxObj = getSound(fx.getString("name"));
+                if (fxObj != null) fxObj.volume = (float) fx.getDouble("volume");
             }
         });
 
@@ -48,7 +45,7 @@ public class SoundLibrary {
         // Music
         // ///////////////////////////
         File musicDir = new File(Launcher.conf.getString("sounds.musicDir"));
-        float defaultMusicVolume = new Double(Launcher.conf.getDouble("sounds.defaultMusicVolume")).floatValue();
+        float defaultMusicVolume = (float) Launcher.conf.getDouble("sounds.defaultMusicVolume");
         // add all the music files with a default volume
         if (musicDir.isDirectory() && musicDir.exists()) for (File musicFile : musicDir.listFiles()) {
             if (musicFile != null && musicFile.exists()){
@@ -59,13 +56,9 @@ public class SoundLibrary {
         ConfigList musicsConf = Launcher.conf.getList("sounds.music");
         musicsConf.forEach(configValue -> {
             if (configValue instanceof ConfigObject){
-                ConfigObject music = (ConfigObject) configValue;
-                if (music.containsKey("name") && music.containsKey("volume")){
-                    String musicName = (String) music.get("name").unwrapped();
-                    float musicVolume = new Double((double) music.get("volume").unwrapped()).floatValue();
-                    MusicEffect musicObj = getMusic(musicName);
-                    if (musicObj != null) musicObj.volume = musicVolume;
-                }
+                Config music = ((ConfigObject) configValue).toConfig();
+                MusicEffect musicObj = getMusic(music.getString("name"));
+                if (musicObj != null) musicObj.volume = (float) music.getDouble("volume");
             }
         });
     }

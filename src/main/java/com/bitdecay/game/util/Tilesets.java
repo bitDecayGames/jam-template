@@ -4,6 +4,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.bitdecay.game.Launcher;
 import com.bitdecay.game.MyGame;
 import com.bitdecay.jump.gdx.level.EditorIdentifierObject;
+import com.typesafe.config.Config;
 import com.typesafe.config.ConfigObject;
 
 import java.util.ArrayList;
@@ -24,13 +25,10 @@ public final class Tilesets {
             tilesets = new ArrayList<>();
             Launcher.conf.getList("tilesets").forEach(confValue -> {
                 if (confValue instanceof ConfigObject){
-                    ConfigObject confObj = (ConfigObject) confValue;
-                    String name = null;
-                    if (confObj.containsKey("name")) name = (String) confObj.get("name").unwrapped();
-                    String path = null;
-                    if (confObj.containsKey("path")) path = (String) confObj.get("path").unwrapped();
-                    int material = 0;
-                    if (confObj.containsKey("material")) material = (int) confObj.get("material").unwrapped();
+                    Config conf = ((ConfigObject) confValue).toConfig();
+                    String name = conf.getString("name");
+                    String path = conf.getString("path");
+                    int material = conf.getInt("material");
                     if (name != null && path != null) {
                         List<TextureRegion> regions = Arrays.asList(MyGame.ATLAS.findRegions(path).toArray());
                         Tileset t = new Tileset(name, material, regions);

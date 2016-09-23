@@ -24,15 +24,11 @@ public class DrawSystem extends AbstractDrawableSystem {
     public void draw(SpriteBatch spriteBatch, OrthographicCamera camera) {
         spriteBatch.setProjectionMatrix(camera.combined);
         spriteBatch.begin();
-        gobs.forEach(gob -> {
-            gob.forEach(DrawableComponent.class, drawable -> {
-                gob.forEach(PositionComponent.class, pos -> {
-                    gob.forEach(SizeComponent.class, size -> {
-                        spriteBatch.draw(drawable.image(), pos.x, pos.y, size.w, size.h);
-                    });
-                });
-            });
-        });
+        gobs.forEach(gob ->
+                gob.forEach(DrawableComponent.class, drawable ->
+                        gob.forEach(PositionComponent.class, pos ->
+                                gob.forEach(SizeComponent.class, size ->
+                                        spriteBatch.draw(drawable.image(), pos.x, pos.y, size.w, size.h)))));
         spriteBatch.end();
     }
 }

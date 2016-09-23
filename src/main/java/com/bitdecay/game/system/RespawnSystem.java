@@ -33,7 +33,7 @@ public class RespawnSystem extends AbstractForEachUpdatableSystem {
 
     @Override
     protected void forEach(float delta, MyGameObject gob) {
-        gob.forEach(RespawnableComponent.class, res -> {
+        gob.forEach(RespawnableComponent.class, res ->
             gob.forEach(PositionComponent.class, pos -> {
                 if (pos.x < minWidth || pos.x > maxWidth || pos.y < minHeight || pos.y > maxHeight) {
                     Vector2 resPos = res.toVector2();
@@ -43,10 +43,11 @@ public class RespawnSystem extends AbstractForEachUpdatableSystem {
                     gob.forEach(PhysicsComponent.class, phy -> {
                         phy.body().aabb.xy.x = resPos.x;
                         phy.body().aabb.xy.y = resPos.y;
+                        phy.body().velocity = phy.body().velocity.scale(0);
                     });
                 }
-            });
-        });
+            })
+        );
     }
 
 }
