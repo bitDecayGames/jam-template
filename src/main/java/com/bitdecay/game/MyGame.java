@@ -19,6 +19,7 @@ public class MyGame extends Game implements ICanSetScreen{
     public static AnimagicTextureAtlas ATLAS;
     public static RunMode RUN_MODE;
 
+
     public MyGame(RunMode runMode){
         super();
         MyGame.RUN_MODE = runMode;
