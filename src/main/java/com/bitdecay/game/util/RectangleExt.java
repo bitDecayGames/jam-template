@@ -274,8 +274,8 @@ public class RectangleExt
     public boolean contains(RectangleExt rectangle)
     {
         Vector2[] points = rectangle.points();
-        for (int i = 0; i < points.length; i++)
-            if (!contains(points[i]))
+        for (Vector2 point : points)
+            if (!contains(point))
                 return false;
         return true;
     }
@@ -327,7 +327,7 @@ public class RectangleExt
 
         if (theirAllTrue && myAllFalse)
             return false;
-        if (theirAllFalse && myAllTrue)
+        else if (theirAllFalse && myAllTrue)
             return false;
         else return !(theirAllFalse && myAllFalse);
     }
@@ -448,12 +448,12 @@ public class RectangleExt
     {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
-        sb.append("x:" + NumberMath.round(x, 2) + ", ");
-        sb.append("y:" + NumberMath.round(y, 2) + ", ");
-        sb.append("width:" + NumberMath.round(width, 2) + ", ");
-        sb.append("height:" + NumberMath.round(height, 2) + ", ");
-        sb.append("rotation:" + NumberMath.round(rotation, 2) + ", ");
-        sb.append("origin:(" + NumberMath.round(origin.x, 2) + ", " + NumberMath.round(origin.y, 2) + ")]");
+        sb.append("x:").append(NumberMath.round(x, 2)).append(", ");
+        sb.append("y:").append(NumberMath.round(y, 2)).append(", ");
+        sb.append("width:").append(NumberMath.round(width, 2)).append(", ");
+        sb.append("height:").append(NumberMath.round(height, 2)).append(", ");
+        sb.append("rotation:").append(NumberMath.round(rotation, 2)).append(", ");
+        sb.append("origin:(").append(NumberMath.round(origin.x, 2)).append(", ").append(NumberMath.round(origin.y, 2)).append(")]");
         return sb.toString();
     }
 }

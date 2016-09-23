@@ -2,6 +2,8 @@ package com.bitdecay.game.util;
 
 import com.bitdecay.jump.gdx.input.KeyState;
 
+import java.util.List;
+
 public class MultiKeyState extends KeyState {
 
     private int[] keys;
@@ -9,6 +11,12 @@ public class MultiKeyState extends KeyState {
     public MultiKeyState(int... keys) {
         super(0);
         this.keys = keys;
+    }
+
+    public MultiKeyState(List<Integer> keys){
+        super(0);
+        this.keys = new int[keys.size()];
+        for (int i = 0; i < keys.size(); i++) this.keys[i] = keys.get(i);
     }
 
     @Override

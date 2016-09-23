@@ -20,8 +20,8 @@ import java.util.stream.Collectors;
 public final class MyGameObjectFromConf {
 
     private static Config gobsConf = Launcher.conf.getConfig("gobs");
-    private static List<Config> defaultConf = gobsConf.getConfigList("default").stream().map(c -> Config.class.cast(c)).collect(Collectors.toList());
-    private static List<Config> listConf = gobsConf.getConfigList("list").stream().map(c -> Config.class.cast(c)).collect(Collectors.toList());
+    private static List<Config> defaultConf = gobsConf.getConfigList("default").stream().map(Config.class::cast).collect(Collectors.toList());
+    private static List<Config> listConf = gobsConf.getConfigList("list").stream().map(Config.class::cast).collect(Collectors.toList());
 
     private MyGameObjectFromConf(){}
 
@@ -89,7 +89,7 @@ public final class MyGameObjectFromConf {
 
     private static List<Config> componentConfigListForConfigRecursive(Optional<Config> confOpt){
         return confOpt.map(conf -> {
-            List<Config> components = conf.getConfigList("components").stream().map(c -> Config.class.cast(c)).collect(Collectors.toList());
+            List<Config> components = conf.getConfigList("components").stream().map(Config.class::cast).collect(Collectors.toList());
             if (conf.hasPath("extends")) doExtend(components, componentConfigListForConfigRecursive(configForObjectName(conf.getString("extends"))));
             return components;
         }).orElse(Collections.emptyList());

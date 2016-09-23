@@ -21,12 +21,12 @@ public class PhysicsSystem extends AbstractForEachUpdatableSystem {
 
     @Override
     protected void forEach(float delta, MyGameObject gob) {
-        gob.forEach(PhysicsComponent.class, phy -> {
+        gob.forEach(PhysicsComponent.class, phy ->
             gob.forEach(PositionComponent.class, pos -> {
                 pos.x = phy.body().aabb.xy.x;
                 pos.y = phy.body().aabb.xy.y;
-            });
-        });
+            })
+        );
     }
 
 }

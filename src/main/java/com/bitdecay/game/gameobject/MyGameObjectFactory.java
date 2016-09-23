@@ -19,14 +19,12 @@ public final class MyGameObjectFactory {
     private MyGameObjectFactory(){}
 
     public static MyGameObject objectFromConf(AbstractRoom room, String name, float x, float y){
-        // TODO: hmmm this is basically just a wrapper... i'm not sure if this is the right way to do it
+        // hmmm this is basically just a wrapper... i'm not sure if this is the right way to do it
         return MyGameObjectFromConf.objectFromConf(room, name, x, y);
     }
 
     public static List<RenderableLevelObject> allLevelObjects(){
-//        return MyGameObjectFromConf.objectConfs().stream().map(config -> new LevelObjectFromConf(config)).map(obj -> RenderableLevelObject.class.cast(obj)).collect(Collectors.toList());
-
-        return MyGameObjectFromConf.objectConfs().stream().map(config -> new ConfBasedLevelObject(config.getString("name"))).map(obj -> RenderableLevelObject.class.cast(obj)).collect(Collectors.toList());
+        return MyGameObjectFromConf.objectConfs().stream().map(config -> new ConfBasedLevelObject(config.getString("name"))).map(RenderableLevelObject.class::cast).collect(Collectors.toList());
     }
 
     public static MyGameObject tile(TileObject tile){

@@ -56,7 +56,7 @@ public class NumberMath
         } else
         {
             int b = numbers[0];
-            int a = 0;
+            int a;
             for (int i = 1; i < numbers.length; i++)
             {
                 a = numbers[i];
