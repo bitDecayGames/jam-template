@@ -24,12 +24,14 @@ public class PhysicsComponent extends AbstractComponent implements IInitializabl
         this.body = body;
     }
 
-    private PhysicsComponent(MyGameObject obj, float width, float height, int jumpStrength, int jumpCount, float jumpVariableHeightWindow, int deceleration, int acceleration, int airAcceleration, boolean jumpHittingHeadStopsJump){
+    private PhysicsComponent(MyGameObject obj, float width, float height, int jumpStrength, int jumpCount, float jumpVariableHeightWindow, int deceleration, int acceleration, int airAcceleration, boolean jumpHittingHeadStopsJump, boolean gravitational, float gravityModifier){
         super(obj);
         JumperBody body = new JumperBody();
         body.props.deceleration = deceleration;
         body.props.acceleration = acceleration;
         body.props.airAcceleration = airAcceleration;
+        body.props.gravitational = gravitational;
+        body.props.gravityModifier = gravityModifier;
         body.jumperProps = new JumperProperties();
         body.jumperProps.jumpStrength = jumpStrength;
         body.jumperProps.jumpCount = jumpCount;
@@ -52,7 +54,9 @@ public class PhysicsComponent extends AbstractComponent implements IInitializabl
                 conf.getInt("deceleration"),
                 conf.getInt("acceleration"),
                 conf.getInt("airAcceleration"),
-                conf.getBoolean("jumpHittingHeadStopsJump"));
+                conf.getBoolean("jumpHittingHeadStopsJump"),
+                conf.getBoolean("gravitational"),
+                (float) conf.getDouble("gravityModifier"));
     }
 
     public BitBody body() {
@@ -76,5 +80,6 @@ public class PhysicsComponent extends AbstractComponent implements IInitializabl
     @Override
     public void remove(AbstractRoom room) {
         room.getWorld().removeBody(body);
+        initialized = false;
     }
 }
