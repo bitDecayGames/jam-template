@@ -23,5 +23,9 @@ public class DemoRoom extends AbstractRoom {
         new ShapeDrawSystem(this);
         new DrawSystem(this);
         new RemovalSystem(this);
+
+        // this is required to be at the end here so that the systems have the latest gobs
+        systemManager.cleanup();
+        levelChanged(level);
     }
 }
