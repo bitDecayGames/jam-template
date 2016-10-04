@@ -17,9 +17,9 @@ import com.bitdecay.game.util.Tilesets;
 import com.bitdecay.jump.collision.BitWorld;
 import com.bitdecay.jump.gdx.level.EditorIdentifierObject;
 import com.bitdecay.jump.gdx.level.RenderableLevelObject;
+import com.bitdecay.jump.level.FileUtils;
 import com.bitdecay.jump.level.Level;
 import com.bitdecay.jump.leveleditor.EditorHook;
-import com.bitdecay.jump.leveleditor.utils.LevelUtilities;
 
 import java.util.Collections;
 import java.util.List;
@@ -35,7 +35,7 @@ public class GameScreen implements Screen, EditorHook, IHasScreenSize, ICanSetSc
 
     public GameScreen(MyGame game){
         this.game = game;
-        setRoom(new DemoRoom(this, LevelUtilities.loadLevel("src/main/resources/level/simple.level")));
+        setRoom(new DemoRoom(this, FileUtils.loadFileAs(Level.class, Gdx.files.classpath("level/simple.level").readString())));
     }
     public GameScreen(MyGame game, com.bitdecay.game.room.AbstractRoom room){
         this.game = game;
