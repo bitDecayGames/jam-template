@@ -252,9 +252,16 @@ public class VectorMath
      */
     public static float angleInRadians(Vector2 v1, Vector2 v2)
     {
-        // float perpDot = (v1.x * v2.x) - (v1.y * v2.y);
-        // return (float) Math.atan2(perpDot, v1.dot(v2));
-        return (float) (Math.atan2(v2.y, v2.x) - Math.atan2(v1.y, v1.x));
+        Vector2 v1 = vec1.cpy().nor();
+        Vector2 v2 = vec2.cpy().nor();
+        double atan2v1 = Math.atan2(v1.y, v1.x);
+        double atan2v2 = Math.atan2(v2.y, v2.x);
+        double angle = atan2v2 - atan2v1;
+        if (v1.x < 0 && v2.x < 0){
+            if (v1.y > 0 && v2.y < 0) angle += 2 * Math.PI;
+            else if (v1.y < 0 && v2.y > 0) angle -= 2 * Math.PI;
+        }
+        return (float) angle;
     }
 
 
