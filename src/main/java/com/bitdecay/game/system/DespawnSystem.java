@@ -33,7 +33,7 @@ public class DespawnSystem extends AbstractForEachUpdatableSystem {
     @Override
     protected void forEach(float delta, MyGameObject gob) {
         gob.forEach(PositionComponent.class, pos -> {
-            if (pos.x < minWidth || pos.x > maxWidth || pos.y < minHeight || pos.y > maxHeight) gob.addComponent(new RemoveNowComponent(gob));
+            if (pos.x < minWidth || pos.x > maxWidth || pos.y < minHeight || pos.y > maxHeight) gob.addComponent(new RemoveNowComponent());
         });
     }
 

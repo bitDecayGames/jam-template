@@ -1,15 +1,12 @@
 package com.bitdecay.game.component;
 
-import com.bitdecay.game.gameobject.MyGameObject;
-
 /**
  * This component is mostly for the level editor for when you want to add a name to the level object.
  */
 public class NameComponent extends AbstractComponent {
     private String name;
 
-    public NameComponent(MyGameObject obj, String name){
-        super(obj);
+    public NameComponent(String name){
         this.name = name;
     }
 

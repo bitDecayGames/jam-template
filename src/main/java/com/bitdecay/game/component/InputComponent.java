@@ -1,6 +1,5 @@
 package com.bitdecay.game.component;
 
-import com.bitdecay.game.gameobject.MyGameObject;
 import com.bitdecay.jump.control.ControlMap;
 
 /**
@@ -9,10 +8,6 @@ import com.bitdecay.jump.control.ControlMap;
 public abstract class InputComponent extends AbstractComponent implements ControlMap {
 
     protected boolean enabled = true;
-
-    public InputComponent(MyGameObject obj) {
-        super(obj);
-    }
 
     @Override
     public void enable() {

@@ -33,8 +33,16 @@ public class MyGameObject implements ICleanup {
         return components.stream().filter(componentClass::isInstance).findFirst().map(componentClass::cast);
     }
 
-    public <T> void forEach(Class<T> componentClass, Consumer<T> doFunc){
+    public Optional<AbstractComponent> getComponent(AbstractComponent component){
+        return components.stream().filter(component::equals).findFirst();
+    }
+
+    public <T> void forEachComponentDo(Class<T> componentClass, Consumer<T> doFunc){
         components.stream().filter(componentClass::isInstance).map(componentClass::cast).forEach(doFunc);
+    }
+
+    public <T> void forEach(Class<T> componentClass, Consumer<T> doFunc){
+        forEachComponentDo(componentClass, doFunc);
     }
 
     /**

@@ -7,7 +7,6 @@ import com.bitdecay.game.room.AbstractRoom;
 import com.bitdecay.game.trait.IInitializable;
 import com.bitdecay.game.util.MultiKeyState;
 import com.bitdecay.jump.control.PlayerAction;
-import com.bitdecay.jump.control.PlayerInputController;
 import com.bitdecay.jump.gdx.input.GDXControls;
 
 import java.util.stream.Collectors;
@@ -21,7 +20,6 @@ public class KeyboardInputComponent extends InputComponent implements IInitializ
     private boolean initialized = false;
 
     public KeyboardInputComponent(MyGameObject obj) {
-        super(obj);
         keyboard = new GDXControls();
         setControls(PlayerAction.JUMP);
         setControls(PlayerAction.UP);
@@ -51,7 +49,6 @@ public class KeyboardInputComponent extends InputComponent implements IInitializ
 
     @Override
     public void initialize(AbstractRoom room) {
-        obj.forEach(PhysicsComponent.class, phy -> phy.body().controller = new PlayerInputController(this));
         initialized = true;
     }
 }

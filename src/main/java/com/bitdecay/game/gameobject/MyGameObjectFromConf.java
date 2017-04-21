@@ -35,12 +35,12 @@ public final class MyGameObjectFromConf {
     public static MyGameObject objectFromConf(String name, float x, float y){
         Optional<Config> conf = configForObjectName(name);
         MyGameObject obj = new MyGameObject();
-        new NameComponent(obj, name).addSelfToGameObject();
-        new PositionComponent(obj, x, y).addSelfToGameObject();
-        new IconComponent(obj, conf.map(config -> {
-            if (config.hasPath("icon")) return config.getString("icon");
-            else throw new RuntimeException("icon is missing from conf value with name: " + name);
-        }).orElseThrow(() -> new RuntimeException("icon is missing from conf value with name: " + name))).addSelfToGameObject();
+        obj.addComponent(new NameComponent(name))
+                .addComponent(new PositionComponent(x, y))
+                .addComponent(new IconComponent(conf.map(config -> {
+                    if (config.hasPath("icon")) return config.getString("icon");
+                    else throw new RuntimeException("icon is missing from conf value with name: " + name);
+                }).orElseThrow(() -> new RuntimeException("icon is missing from conf value with name: " + name))));
         List<Config> componentsList = componentConfigListForConfig(conf);
         componentsList.forEach(componentConf -> {
             String className = "com.bitdecay.game.component." + componentConf.getString("name") + "Component";
@@ -48,11 +48,11 @@ public final class MyGameObjectFromConf {
                 Class componentClass = Class.forName(className);
                 try {
                     Constructor<? extends AbstractComponent> componentConstructorWithConf = componentClass.getConstructor(MyGameObject.class, Config.class);
-                    componentConstructorWithConf.newInstance(obj, componentConf).addSelfToGameObject();
+                    obj.addComponent(componentConstructorWithConf.newInstance(obj, componentConf));
                 }  catch (NoSuchMethodException a) {
                     try {
                         Constructor<? extends AbstractComponent> componentConstructor = componentClass.getConstructor(MyGameObject.class);
-                        componentConstructor.newInstance(obj).addSelfToGameObject();
+                        obj.addComponent(componentConstructor.newInstance(obj));
                     } catch (NoSuchMethodException b) {
                         err("Could not construct component with name: " + className + " (Tip: look in the component class, there must be a constructor that takes only a MyGameObject, or a constructor that takes a MyGameObject and a Config)");
                     }

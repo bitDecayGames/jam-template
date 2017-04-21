@@ -1,7 +1,6 @@
 package com.bitdecay.game.component;
 
 import com.badlogic.gdx.math.Vector2;
-import com.bitdecay.game.gameobject.MyGameObject;
 import com.bitdecay.game.room.AbstractRoom;
 import com.bitdecay.game.trait.IInitializable;
 
@@ -13,11 +12,14 @@ public class RespawnableComponent extends AbstractComponent implements IInitiali
     private float y = 0;
     private boolean initialized = false;
 
-    public RespawnableComponent(MyGameObject obj){super(obj);}
-    private RespawnableComponent(MyGameObject obj, float x, float y){
-        super(obj);
+    private RespawnableComponent(float x, float y){
         this.x = x;
         this.y = y;
+    }
+
+    private RespawnableComponent(PositionComponent pos){
+        x = pos.x;
+        y = pos.y;
     }
 
     /**
@@ -35,10 +37,6 @@ public class RespawnableComponent extends AbstractComponent implements IInitiali
 
     @Override
     public void initialize(AbstractRoom room) {
-        obj.forEach(PositionComponent.class, pos -> {
-            x = pos.x;
-            y = pos.y;
-        });
         initialized = true;
     }
 }

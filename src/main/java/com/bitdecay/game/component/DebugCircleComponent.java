@@ -3,7 +3,6 @@ package com.bitdecay.game.component;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Vector2;
-import com.bitdecay.game.gameobject.MyGameObject;
 import com.bitdecay.game.trait.IShapeDraw;
 import com.typesafe.config.Config;
 
@@ -14,14 +13,12 @@ public class DebugCircleComponent extends AbstractComponent implements IShapeDra
     public final Color color;
     public final float radius;
 
-    private DebugCircleComponent(MyGameObject obj, Color color, float radius){
-        super(obj);
+    private DebugCircleComponent(Color color, float radius){
         this.color = color.cpy();
         this.radius = radius;
     }
 
-    public DebugCircleComponent(MyGameObject obj, Config conf) {
-        super(obj, conf);
+    public DebugCircleComponent(Config conf) {
         this.radius = (float) conf.getDouble("radius");
         Config colorConf = conf.getConfig("color");
         this.color = new Color(

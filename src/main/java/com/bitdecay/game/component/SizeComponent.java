@@ -1,6 +1,5 @@
 package com.bitdecay.game.component;
 
-import com.bitdecay.game.gameobject.MyGameObject;
 import com.typesafe.config.Config;
 
 /**
@@ -10,12 +9,11 @@ public class SizeComponent extends AbstractComponent {
     public float w = 0;
     public float h = 0;
 
-    public SizeComponent(MyGameObject obj, Config conf) {
-        this(obj, (float) conf.getDouble("w"), (float) conf.getDouble("h"));
+    public SizeComponent(Config conf) {
+        this((float) conf.getDouble("w"), (float) conf.getDouble("h"));
     }
 
-    public SizeComponent(MyGameObject obj, float width, float height){
-        super(obj);
+    public SizeComponent(float width, float height){
         this.w = width;
         this.h = height;
     }

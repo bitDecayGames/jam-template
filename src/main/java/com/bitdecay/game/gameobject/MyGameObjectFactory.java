@@ -29,9 +29,9 @@ public final class MyGameObjectFactory {
     public static MyGameObject tile(TileObject tile){
         Tilesets.Tileset tileset = Tilesets.tilesetForMaterial(tile.material);
         MyGameObject t = new MyGameObject();
-        t.addComponent(new PositionComponent(t, tile.rect.xy.x, tile.rect.xy.y));
-        t.addComponent(new SizeComponent(t, tile.rect.width, tile.rect.height));
-        t.addComponent(new TileComponent(t, tileset.regions().get(tile.renderNValue)));
+        t.addComponent(new PositionComponent(tile.rect.xy.x, tile.rect.xy.y));
+        t.addComponent(new SizeComponent(tile.rect.width, tile.rect.height));
+        t.addComponent(new TileComponent(tileset.regions().get(tile.renderNValue)));
         return t;
     }
 }

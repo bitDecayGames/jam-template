@@ -1,6 +1,5 @@
 package com.bitdecay.game.component;
 
-import com.bitdecay.game.gameobject.MyGameObject;
 import com.bitdecay.game.room.AbstractRoom;
 import com.bitdecay.game.trait.IInitializable;
 import com.bitdecay.game.trait.IRemovable;
@@ -19,13 +18,11 @@ public class PhysicsComponent extends AbstractComponent implements IInitializabl
     private BitBody body;
     private boolean initialized = false;
 
-    private PhysicsComponent(MyGameObject obj, BitBody body){
-        super(obj);
+    private PhysicsComponent(BitBody body){
         this.body = body;
     }
 
-    private PhysicsComponent(MyGameObject obj, float width, float height, int jumpStrength, int jumpCount, float jumpVariableHeightWindow, int deceleration, int acceleration, int airAcceleration, boolean jumpHittingHeadStopsJump, boolean gravitational, float gravityModifier){
-        super(obj);
+    private PhysicsComponent(float width, float height, int jumpStrength, int jumpCount, float jumpVariableHeightWindow, int deceleration, int acceleration, int airAcceleration, boolean jumpHittingHeadStopsJump, boolean gravitational, float gravityModifier){
         JumperBody body = new JumperBody();
         body.props.deceleration = deceleration;
         body.props.acceleration = acceleration;
@@ -44,19 +41,18 @@ public class PhysicsComponent extends AbstractComponent implements IInitializabl
         this.body = body;
     }
 
-    public PhysicsComponent(MyGameObject obj, Config conf) {
-        this(obj,
-                (float) conf.getDouble("width"),
-                (float) conf.getDouble("height"),
-                conf.getInt("jumpStrength"),
-                conf.getInt("jumpCount"),
-                (float) conf.getDouble("jumpVariableHeightWindow"),
-                conf.getInt("deceleration"),
-                conf.getInt("acceleration"),
-                conf.getInt("airAcceleration"),
-                conf.getBoolean("jumpHittingHeadStopsJump"),
-                conf.getBoolean("gravitational"),
-                (float) conf.getDouble("gravityModifier"));
+    public PhysicsComponent(Config conf) {
+        this((float) conf.getDouble("width"),
+             (float) conf.getDouble("height"),
+             conf.getInt("jumpStrength"),
+             conf.getInt("jumpCount"),
+             (float) conf.getDouble("jumpVariableHeightWindow"),
+             conf.getInt("deceleration"),
+             conf.getInt("acceleration"),
+             conf.getInt("airAcceleration"),
+             conf.getBoolean("jumpHittingHeadStopsJump"),
+             conf.getBoolean("gravitational"),
+             (float) conf.getDouble("gravityModifier"));
     }
 
     public BitBody body() {
@@ -70,9 +66,6 @@ public class PhysicsComponent extends AbstractComponent implements IInitializabl
 
     @Override
     public void initialize(AbstractRoom room) {
-        obj.forEach(PositionComponent.class, pos -> {
-            body.aabb.xy.set(pos.x, pos.y);
-        });
         room.getWorld().addBody(body);
         initialized = true;
     }
