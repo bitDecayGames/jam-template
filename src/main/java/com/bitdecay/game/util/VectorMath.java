@@ -245,12 +245,8 @@ public class VectorMath
 
     /**
      * Gets the angle between two Vector2's in radians
-     *
-     * @param v1
-     * @param v2
-     * @return
      */
-    public static float angleInRadians(Vector2 v1, Vector2 v2)
+    public static float angleInRadians(Vector2 vec1, Vector2 vec2)
     {
         Vector2 v1 = vec1.cpy().nor();
         Vector2 v2 = vec2.cpy().nor();
