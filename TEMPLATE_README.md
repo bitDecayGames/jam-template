@@ -1,6 +1,6 @@
 # Jump-Template
 
-This template project is for use when trying to set up a new project with Jump.  It starts you out with several basic and generic pieces:
+This template project is for use when trying to set up a new project.  It starts you out with several basic and generic pieces:
 
 1. A few start up screens like:
   * Splash screen
@@ -13,12 +13,7 @@ It does not contain very much actual room code.  Most of that is left up to you 
 
 ## Install
 
-You will need to install both the ```jump``` and the ```animagic``` projects as dependencies.  The way you do this is by cloning those repositories into an adjacent folder to the jump-template.  You will need to have git setup with the correct ssh keys and you will need to have maven installed and accessible through command line.  I'll show you how to do it with jump, and then you just need to repeat the steps with animagic.
-
-Jump:
-```
-git@github.com:bitDecayGames/Jump.git
-```
+You will need to install both the ```animagic``` project as a dependency.  The way you do this is by cloning the repository into an adjacent folder to the jump-template.  You will need to have git setup with the correct ssh keys and you will need to have maven installed and accessible through command line.
 
 Animagic:
 ```
@@ -29,12 +24,12 @@ First, clone the repository into an adjacent directory:
 ```bash
 # starting from this project's root directory
 cd ..
-git clone git@github.com:bitDecayGames/Jump.git
+git clone git@github.com:Kenoshen/animagic.git
 ```
 
 Next, move into that repositories root directory:
 ```
-cd Jump
+cd animagic
 ```
 
 Use the maven install command to compile, build, and install the project into your local maven repository.  It will then become accessible through this project's pom.xml:

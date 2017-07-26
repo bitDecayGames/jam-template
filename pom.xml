@@ -176,26 +176,6 @@
         <!-- END CONFIG DEPENDENCIES -->
         <!-- START CUSTOM TOOLS DEPENDENCIES -->
         <dependency>
-            <groupId>com.bitdecay</groupId>
-            <artifactId>jump-common</artifactId>
-            <version>${jumpVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.bitdecay</groupId>
-            <artifactId>jump-core</artifactId>
-            <version>${jumpVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.bitdecay</groupId>
-            <artifactId>jump-gdx</artifactId>
-            <version>${jumpVersion}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.bitdecay</groupId>
-            <artifactId>jump-leveleditor</artifactId>
-            <version>${jumpVersion}</version>
-        </dependency>
-        <dependency>
             <groupId>com.bytebreakstudios</groupId>
             <artifactId>animagic</artifactId>
             <version>${animagicVersion}</version>

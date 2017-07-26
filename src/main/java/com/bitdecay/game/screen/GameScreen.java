@@ -3,31 +3,19 @@ package com.bitdecay.game.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Vector2;
 import com.bitdecay.game.Launcher;
 import com.bitdecay.game.MyGame;
-import com.bitdecay.game.gameobject.MyGameObjectFactory;
 import com.bitdecay.game.room.DemoRoom;
 import com.bitdecay.game.trait.ICanSetRoom;
 import com.bitdecay.game.trait.ICanSetScreen;
 import com.bitdecay.game.trait.IHasScreenSize;
 import com.bitdecay.game.util.SoundLibrary;
-import com.bitdecay.game.util.Tilesets;
-import com.bitdecay.jump.collision.BitWorld;
-import com.bitdecay.jump.gdx.level.EditorIdentifierObject;
-import com.bitdecay.jump.gdx.level.RenderableLevelObject;
-import com.bitdecay.jump.level.FileUtils;
-import com.bitdecay.jump.level.Level;
-import com.bitdecay.jump.leveleditor.EditorHook;
-
-import java.util.Collections;
-import java.util.List;
 
 /**
  * The game screen used to be the main source of game logic.  It is now more just like any other screen.  It allows for the game to switch to it, but the main logic is moved into the Room class.  In the same way you can switch from screen to screen with a reference to the MyGame object, you can switch from room to room with the GameScreen object.
  */
-public class GameScreen implements Screen, EditorHook, IHasScreenSize, ICanSetScreen, ICanSetRoom {
+public class GameScreen implements Screen, IHasScreenSize, ICanSetScreen, ICanSetRoom {
 
     private MyGame game;
 
@@ -35,7 +23,7 @@ public class GameScreen implements Screen, EditorHook, IHasScreenSize, ICanSetSc
 
     public GameScreen(MyGame game){
         this.game = game;
-        setRoom(new DemoRoom(this, FileUtils.loadFileAs(Level.class, Gdx.files.classpath("level/simple.level").readString())));
+        setRoom(new DemoRoom(this));
     }
     public GameScreen(MyGame game, com.bitdecay.game.room.AbstractRoom room){
         this.game = game;
@@ -55,19 +43,13 @@ public class GameScreen implements Screen, EditorHook, IHasScreenSize, ICanSetSc
     }
 
     @Override
-    public void resize(int width, int height) {
-
-    }
+    public void resize(int width, int height) { }
 
     @Override
-    public void pause() {
-
-    }
+    public void pause() { }
 
     @Override
-    public void resume() {
-
-    }
+    public void resume() { }
 
     @Override
     public void hide() {
@@ -93,43 +75,5 @@ public class GameScreen implements Screen, EditorHook, IHasScreenSize, ICanSetSc
     public void setRoom(com.bitdecay.game.room.AbstractRoom room) {
         if (this.room != null) this.room.dispose();
         this.room = room;
-    }
-
-    // ////////////////////////////////////
-    // Level editor hook methods
-    // ////////////////////////////////////
-
-    @Override
-    public void update(float delta) {
-        if (room != null) room.update(delta);
-    }
-
-    @Override
-    public void render(OrthographicCamera orthographicCamera) {
-        if (room != null) room.render(orthographicCamera);
-    }
-
-    @Override
-    public BitWorld getWorld() {
-        if (room != null) return room.getWorld();
-        else return null;
-    }
-
-    @Override
-    public List<EditorIdentifierObject> getTilesets() {
-        return Tilesets.editorTilesets();
-    }
-
-    @Override
-    public List<RenderableLevelObject> getCustomObjects() {
-        return MyGameObjectFactory.allLevelObjects();
-    }
-
-    @Override
-    public List<EditorIdentifierObject> getThemes() { return Collections.emptyList(); }
-
-    @Override
-    public void levelChanged(Level level) {
-        if (room != null) room.levelChanged(level);
     }
 }

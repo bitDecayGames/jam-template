@@ -1,7 +1,6 @@
 package com.bitdecay.game.system;
 
 import com.badlogic.gdx.math.Vector2;
-import com.bitdecay.game.component.PhysicsComponent;
 import com.bitdecay.game.component.PositionComponent;
 import com.bitdecay.game.component.RespawnableComponent;
 import com.bitdecay.game.gameobject.MyGameObject;
@@ -39,12 +38,6 @@ public class RespawnSystem extends AbstractForEachUpdatableSystem {
                     Vector2 resPos = res.toVector2();
                     pos.x = resPos.x;
                     pos.y = resPos.y;
-
-                    gob.forEach(PhysicsComponent.class, phy -> {
-                        phy.body().aabb.xy.x = resPos.x;
-                        phy.body().aabb.xy.y = resPos.y;
-                        phy.body().velocity = phy.body().velocity.scale(0);
-                    });
                 }
             })
         );
